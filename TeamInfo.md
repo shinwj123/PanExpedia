@@ -24,4 +24,7 @@
 | Video Link  |        |
 
 ## Project Summary
-Please put your project summary here
+Ever since the pandemic started, people have been apprehensive about traveling, holding back their urge to explore due to a fear of catching COVID. Despite different countries having certain ideas for whether or not it is safe to travel, many people will have their own personal opinions on the matter. By combining information about both COVID and airports, users will be able to look into the pandemic situation for potential vacation spots, giving them one less thing to worry about while planning a trip. 
+
+The main goal of this application is to help people gain confidence in their trips as the pandemic goes on, giving them the power to decide for themselves whether or not to travel to a certain location.
+
