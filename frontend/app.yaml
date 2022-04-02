@@ -3,10 +3,10 @@ runtime: pyton38
 instance_class: F1
 
 env_variables:
-  MY_SQL: 'root'
-  MYSQL_PASSWORD: <placeholder>
-  MYSQL_DB: 'todo'
-  MYSQL_HOST: <ip_address>
+  MYSQL_USER: 'root'
+  MYSQL_PASSWORD: 'Abdu_formed_team0'
+  MYSQL_DB: 'AbDB'
+  MYSQL_HOST: '34.68.50.19'
 
 handlers:
   url: /img
