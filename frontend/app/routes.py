@@ -3,10 +3,10 @@ from flask import render_template, request, jsonify
 from app import app
 from app import database as db_helper
 
-@app.route("/delete/<int:task_id>", methods=['POST'])
-def delete(task_id):
+@app.route("/delete/", methods=['POST'])
+def delete():
     """ recieved post requests for entry delete """
-
+    task_id = 2
     try:
         db_helper.remove_task_by_id(task_id)
         result = {'success': True, 'response': 'Removed task'}
@@ -17,7 +17,7 @@ def delete(task_id):
 
 
 @app.route("/edit/<int:task_id>", methods=['POST'])
-def update(task_id):
+def bad(task_id):
     """ recieved post requests for entry updates """
 
     data = request.get_json()
@@ -36,6 +36,17 @@ def update(task_id):
 
     return jsonify(result)
 
+@app.route("/update", methods=['POST'])
+def update():
+    task_id = 2
+    try:
+        db_helper.updateUser(task_id)
+        result = {'success': True, 'response': 'Done'}
+    except:
+        result = {'success': False, 'response': 'Something went wrong'}
+
+    return jsonify(result)
+    
 
 @app.route("/create", methods=['GET', 'POST'])
 def create():
@@ -44,7 +55,9 @@ def create():
     #data = request.get_json()
     #print(data)
     db_helper.insert_new_task("filler")
+    print("here 2")
     result = {'success': True, 'response': 'Done'}
+    #return redirect(url_for('results'))
     return jsonify(result)
 
 

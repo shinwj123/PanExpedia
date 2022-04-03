@@ -16,7 +16,7 @@ def fetch_todo() -> dict:
     users = []
     for result in query:
         item = {
-            "id": result[0] + " " + result[1],
+            "id": result[3],
             "task": result[2],
             "status": "Todo"
         }
@@ -24,16 +24,16 @@ def fetch_todo() -> dict:
     return users
 
 
-def update_task_entry(task_id: int, text: str) -> None:
+def update(task_id: int, text: str) -> None:
     pass
 
 def update_status_entry(task_id: int, text: str) -> None:
-    pass
+    
 
 def insert_new_task(text: str) ->  int:
     conn = db.connect()
     print("Within db")
-    query = 'INSERT INTO UserProfile (userFirstName, userLastName, destinationCity, email, password) VALUES ("Steven", "James", "New York City", "email5", "pass");'
+    query = 'INSERT INTO UserProfile (userFirstName, userLastName, destinationCity, email, password) VALUES ("Steven", "James", "New York City", "e12", "pass");'
     conn.execute(query)
     task_id = 2
     # query_results = conn.execute("SELECT * FROM UserProfile ORDER BY userLastName DESC LIMIT 1;")
@@ -47,4 +47,8 @@ def insert_new_task(text: str) ->  int:
     return task_id
 
 def remove_task_by_id(task_id: int) -> None:
-    pass
+    conn = db.connect()
+    query = 'DELETE FROM UserProfile WHERE email="e";'
+    conn.execute(query)
+    task_id = 2
+    conn.close()

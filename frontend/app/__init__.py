@@ -25,10 +25,10 @@ def init_connect_engine():
 
 db = init_connect_engine()
 
-conn = db.connect()
-results = conn.execute("Select * from CountryData LIMIT 15;").fetchall()
-print([x for x in results])
-conn.close()
+# conn = db.connect()
+# results = conn.execute("Select * from CountryData LIMIT 15;").fetchall()
+# print([x for x in results])
+# conn.close()
 
 from app import routes
 
