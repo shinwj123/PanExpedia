@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+""" Specifies routing for the application"""
+from flask import render_template, request, jsonify
 from app import app
 from app import database as db_helper
 
@@ -13,6 +14,7 @@ def delete(task_id):
         result = {'success': False, 'response': 'Something went wrong'}
 
     return jsonify(result)
+
 
 @app.route("/edit/<int:task_id>", methods=['POST'])
 def update(task_id):
@@ -34,6 +36,7 @@ def update(task_id):
 
     return jsonify(result)
 
+
 @app.route("/create", methods=['POST'])
 def create():
     """ recieves post requests to add new task """
@@ -42,7 +45,9 @@ def create():
     result = {'success': True, 'response': 'Done'}
     return jsonify(result)
 
+
 @app.route("/")
 def homepage():
+    """ returns rendered homepage """
     items = db_helper.fetch_todo()
     return render_template("index.html", items=items)
