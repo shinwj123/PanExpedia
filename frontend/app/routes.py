@@ -37,11 +37,13 @@ def update(task_id):
     return jsonify(result)
 
 
-@app.route("/create", methods=['POST'])
+@app.route("/create", methods=['GET', 'POST'])
 def create():
     """ recieves post requests to add new task """
-    data = request.get_json()
-    db_helper.insert_new_task(data['description'])
+    print("HERE")
+    #data = request.get_json()
+    #print(data)
+    db_helper.insert_new_task("filler")
     result = {'success': True, 'response': 'Done'}
     return jsonify(result)
 

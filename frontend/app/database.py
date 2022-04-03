@@ -6,20 +6,6 @@ def fetch_todo() -> dict:
     # Returns:
     #     A list of dictionaries
     # """
-
-    todo_list = [
-        {
-            "id": 1,
-            "task": "test1",
-            "status": "Todo"
-        },
-        {
-            "id": 1,
-            "task": "test1",
-            "status": "Todo"
-        },
-    ]
-
     #return todo_list
 
     conn = db.connect()
@@ -34,8 +20,8 @@ def fetch_todo() -> dict:
             "task": result[2],
             "status": "Todo"
         }
-        todo_list.append(item)
-    return todo_list
+        users.append(item)
+    return users
 
 
 def update_task_entry(task_id: int, text: str) -> None:
@@ -46,11 +32,16 @@ def update_status_entry(task_id: int, text: str) -> None:
 
 def insert_new_task(text: str) ->  int:
     conn = db.connect()
-    query = 'INSERT INTO UserProfile (userFirstName, userLastName, destinationCity, email, password) VALUES ("{}", "{}", "Chicago", "email", "pass");'.format(text, text)
-    con.execute(query)
-    query_results = conn.execute("Select LAST_INSERT_ID();")
-    query_results = [x for x in query_results]
-    task_id = query_results[0][0]
+    print("Within db")
+    query = 'INSERT INTO UserProfile (userFirstName, userLastName, destinationCity, email, password) VALUES ("Steven", "James", "New York City", "email5", "pass");'
+    conn.execute(query)
+    task_id = 2
+    # query_results = conn.execute("SELECT * FROM UserProfile ORDER BY userLastName DESC LIMIT 1;")
+    # print("Here1")
+    # query_results = [x for x in query_results]
+    # print("Here2")
+    # task_id = query_results[0][0]
+    # print("Here3")
     conn.close()
 
     return task_id
