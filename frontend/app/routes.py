@@ -6,9 +6,8 @@ from app import database as db_helper
 @app.route("/delete/", methods=['POST'])
 def delete():
     """ recieved post requests for entry delete """
-    task_id = 2
     try:
-        db_helper.remove_task_by_id(task_id)
+        db_helper.remove_user_by_email(request.args.get('e'))
         result = {'success': True, 'response': 'Removed task'}
     except:
         result = {'success': False, 'response': 'Something went wrong'}

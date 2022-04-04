@@ -30,9 +30,10 @@ function add() {
 };
 
 function deleteOne() {
+    let email = document.getElementById("deleteEmail").value;
     $.ajax({
         type: 'POST',
-        url: '/delete',
+        url: '/delete?e='+email,
         contentType: 'application/jason;charset=UTF-8',
         success: function (res) {
             console.log(res.response);

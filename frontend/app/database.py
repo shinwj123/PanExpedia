@@ -49,11 +49,10 @@ def insert_new_user(fn: str, ln: str, dc: str, email: str, p: str) ->  int:
 
     return task_id
 
-def remove_task_by_id(task_id: int) -> None:
+def remove_user_by_email(email: str) -> None:
     conn = db.connect()
-    query = 'DELETE FROM UserProfile WHERE email="email";'
+    query = 'DELETE FROM UserProfile WHERE email="'+email+'";'
     conn.execute(query)
-    task_id = 2
     conn.close()
 
 def search_db(c: str) -> None:
