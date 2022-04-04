@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Country Info</title>
+
+    </head>
+
+    <body>
+        {% for item in res %} 
+            <h1>{{item.country}}</h1>
+            <h1>Population: {{item.population}}</h1>
+        {% endfor %}
+
+        <!-- <button id="backButton">Return Home</button> -->
+    </body>
+</html>

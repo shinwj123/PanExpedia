@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Demo: TODO</title>
+        <title>PanExpedia</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -166,9 +166,13 @@
     <!-- <button id="button" onclick="add()">Add</button> -->
     <input type="text" id="deleteEmail" placeholder="Email to delete" required>
     <button id="button" onclick="deleteOne()">Delete</button>
+    
     <!-- <button id="button" onclick="update()">Update</button> -->
-    <input type="text" id="searchCountry" placeholder="Country Name" required>
-    <button id="button" onclick="search()">Search</button>
+    <form action="/home" method="POST">
+      <p>Country Name <input type = "text" name = "name" /></p>
+      <p><input type = "submit" value = "Submit" /></p>
+    </form>
+
 
     <!-- {% for item in res %} 
     <p>{{item.country}}</p>

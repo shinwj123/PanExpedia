@@ -73,7 +73,6 @@ function search() {
         url: '/search?c='+country,
         success: function (res) {
             console.log(res.response);
-            location.reload();
         },
         error: function() {
             console.log('Error');

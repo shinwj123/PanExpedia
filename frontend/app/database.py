@@ -57,7 +57,6 @@ def remove_user_by_email(email: str) -> None:
 
 def search_db(c: str) -> None:
     conn = db.connect()
-    print(c)
     query = 'SELECT * FROM CountryData WHERE country="{}";'.format(c)
     results = conn.execute(query)
     conn.close()
@@ -68,7 +67,5 @@ def search_db(c: str) -> None:
             "population": r[2]
         }
         res.append(item)
-    print("SUCCESS!")
-    print(res)
 
     return res

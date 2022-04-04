@@ -1,5 +1,5 @@
 """ Specifies routing for the application"""
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, redirect
 from app import app
 from app import database as db_helper
 
@@ -55,10 +55,19 @@ def create():
 
 @app.route("/search", methods=['POST'])
 def search():
-    db_helper.search_db(request.args.get('c'))
+    res=db_helper.search_db(request.args.get('c'))
     result = {'success': True, 'response': 'Done'}
     print("SUCCESS?")
-    return jsonify(result)
+    return render_template("country.html", res=res)
+
+@app.route("/home", methods=['GET', 'POST'])
+def home():
+    print('HERE')
+    name = request.form['name']
+    print(name)
+    res = db_helper.search_db(name)
+    print(res)
+    return render_template("country.html", res=res)
 
 @app.route("/")
 def homepage():
