@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Covid Rate In Each Country</title>
+
+    </head>
+
+    <body>
+        {% for item in res_ %} 
+            <h2>{{item.country}}</h2>
+            <h2>Covid Rate: {{item.rate}}</h2>
+        {% endfor %}
+
+        <!-- <button id="backButton">Return Home</button> -->
+    </body>
+</html>

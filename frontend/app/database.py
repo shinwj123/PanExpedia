@@ -69,3 +69,34 @@ def search_db(c: str) -> None:
         res.append(item)
 
     return res
+
+def getCovidRate():
+    conn = db.connect()
+    query = 'SELECT country, SUM(newCaseNumber)/population as rate FROM CountryData NATURAL JOIN CovidCases GROUP BY country ORDER BY rate DESC;'
+    results = conn.execute(query)
+    conn.close()
+    res = []
+    for r in results:
+        item = {
+            "country": r[0],
+            "rate": r[1]
+        }
+        res.append(item)
+
+    return res
+
+def getVaxRate():
+    conn = db.connect()
+    query = 'SELECT airportName as "Airport", country as "Country", rate/3 as "Vaccination Rate" FROM (SELECT country as c, SUM(dailyVaccinationNumber)/population as rate FROM CountryData NATURAL JOIN Vaccination GROUP BY country) as temp, AirportData WHERE rate > 0.5 AND country = c;'
+    results = conn.execute(query)
+    conn.close()
+    res = []
+    for r in results:
+        item = {
+            "airport": r[0],
+            "country": r[1],
+            "vaccinationRate": r[2]
+        }
+        res.append(item)
+
+    return res

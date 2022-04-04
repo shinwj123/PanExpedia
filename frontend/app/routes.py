@@ -75,3 +75,21 @@ def homepage():
     items = db_helper.fetch_todo()
     #res = db_helper.search_db(request.args.get('c'))
     return render_template("index.html", items=items)
+
+@app.route("/covidRate", methods=['GET', 'POST'])
+def covidRate():
+    print('HERE')
+    #name = request.form['Rate in Country'] # getting info that is stored in name
+    #print(name)
+    res = db_helper.getCovidRate()
+    print(res)
+    return render_template("covidrate.html", res_=res)
+
+@app.route("/vaxRate", methods=['GET', 'POST'])
+def vaccinationRate():
+    print('HERE')
+    #name = request.form['Rate in Country'] # getting info that is stored in name
+    #print(name)
+    res = db_helper.getVaxRate()
+    print(res)
+    return render_template("vaccinationrate.html", res_=res)
