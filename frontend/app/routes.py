@@ -56,13 +56,14 @@ def create():
 
 @app.route("/search", methods=['POST'])
 def search():
-    db_helper.search_db()
+    db_helper.search_db(request.args.get('c'))
     result = {'success': True, 'response': 'Done'}
+    print("SUCCESS?")
     return jsonify(result)
 
 @app.route("/")
 def homepage():
     """ returns rendered homepage """
     items = db_helper.fetch_todo()
-    res = db_helper.search_db()
-    return render_template("index.html", items=items, res=res)
+    #res = db_helper.search_db(request.args.get('c'))
+    return render_template("index.html", items=items)

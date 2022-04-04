@@ -161,14 +161,17 @@
         <button type="submit" class="btn" onclick="update()">UPDATE</button>
       </form>
 
+      <input type="text" id="searchCountry" placeholder="Country Name" required>
+
     <button id="button" onclick="add()">Add</button>
     <button id="button" onclick="deleteOne()">Delete</button>
     <button id="button" onclick="update()">Update</button>
     <button id="button" onclick="search()">Search</button>
-    {% for item in res %} 
+
+    <!-- {% for item in res %} 
     <p>{{item.country}}</p>
     <p>{{item.population}}</p>
-    {% endfor %}
+    {% endfor %} -->
 
 
     <footer class="footer">

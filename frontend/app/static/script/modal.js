@@ -66,9 +66,10 @@ function update() {
 };
 
 function search() {
+    let country = document.getElementById("searchCountry").value;
     $.ajax({
         type:'POST',
-        url: '/search',
+        url: '/search?c='+country,
         success: function (res) {
             console.log(res.response);
             location.reload();

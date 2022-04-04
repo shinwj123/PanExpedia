@@ -56,9 +56,10 @@ def remove_task_by_id(task_id: int) -> None:
     task_id = 2
     conn.close()
 
-def search_db() -> None:
+def search_db(c: str) -> None:
     conn = db.connect()
-    query = 'SELECT * FROM CountryData WHERE country="Iraq";'
+    print(c)
+    query = 'SELECT * FROM CountryData WHERE country="{}";'.format(c)
     results = conn.execute(query)
     conn.close()
     res = []
@@ -68,5 +69,7 @@ def search_db() -> None:
             "population": r[2]
         }
         res.append(item)
+    print("SUCCESS!")
+    print(res)
 
     return res
