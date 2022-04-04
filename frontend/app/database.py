@@ -25,31 +25,32 @@ def fetch_todo() -> dict:
     return users
 
 
-def update(task_id: int, text: str) -> None:
-    pass
+def update(fn: str, ln: str, dc: str, email: str, p: str) -> None:
+    conn = db.connect()
+    print(fn)
+    print(email)
+    query = 'UPDATE UserProfile SET userFirstName="'+fn+'", userLastName="'+ln+'", destinationCity="'+dc+'", password="'+p+'" WHERE email="'+email+'";'.format(fn, ln, dc, p, email)
+    #query = 'UPDATE UserProfile SET userFirstName="steven", userLastName="james", destinationCity="Chicago", password="asdf" WHERE email="tejal";'
+    print("ARE YOU THERE")
+    conn.execute(query)
+    conn.close()
 
 def update_status_entry(task_id: int, text: str) -> None:
     pass
 
-def insert_new_task(text: str) ->  int:
+def insert_new_user(fn: str, ln: str, dc: str, email: str, p: str) ->  int:
     conn = db.connect()
     print("Within db")
-    query = 'INSERT INTO UserProfile (userFirstName, userLastName, destinationCity, email, password) VALUES ("Steven", "James", "New York City", "e12", "pass");'
+    query = 'INSERT INTO UserProfile (userFirstName, userLastName, destinationCity, email, password) VALUES ("{}", "{}", "{}", "{}", "{}");'.format(fn, ln, dc, email, p)
     conn.execute(query)
     task_id = 2
-    # query_results = conn.execute("SELECT * FROM UserProfile ORDER BY userLastName DESC LIMIT 1;")
-    # print("Here1")
-    # query_results = [x for x in query_results]
-    # print("Here2")
-    # task_id = query_results[0][0]
-    # print("Here3")
     conn.close()
 
     return task_id
 
 def remove_task_by_id(task_id: int) -> None:
     conn = db.connect()
-    query = 'DELETE FROM UserProfile WHERE email="e";'
+    query = 'DELETE FROM UserProfile WHERE email="email";'
     conn.execute(query)
     task_id = 2
     conn.close()

@@ -38,23 +38,17 @@ def bad(task_id):
 
 @app.route("/update", methods=['POST'])
 def update():
-    task_id = 2
-    try:
-        db_helper.updateUser(task_id)
-        result = {'success': True, 'response': 'Done'}
-    except:
-        result = {'success': False, 'response': 'Something went wrong'}
-
+    """ recieves post requests to add new task """
+    db_helper.update(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), request.args.get('email'), request.args.get('pass'))
+    result = {'success': True, 'response': 'Done'}
+    #return redirect(url_for('results'))
     return jsonify(result)
     
 
-@app.route("/create", methods=['GET', 'POST'])
+@app.route("/create", methods=['POST'])
 def create():
     """ recieves post requests to add new task """
-    print("HERE")
-    #data = request.get_json()
-    #print(data)
-    db_helper.insert_new_task("filler")
+    db_helper.insert_new_user(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), request.args.get('email'), request.args.get('pass'))
     print("here 2")
     result = {'success': True, 'response': 'Done'}
     #return redirect(url_for('results'))

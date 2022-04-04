@@ -97,6 +97,70 @@
     </table>
     </div>
 
+    <div class="loginPopup">
+        <div class="formPopup" id="popupForm">
+          <form class="formContainer">
+            <h2>ADD USER</h2>
+            <label for="userFirstName">
+              <strong>First Name</strong>
+            </label>
+            <input type="text" id="userFirstName" placeholder="First Name" name="userFirstName" required>
+
+            <label for="userLastName">
+              <strong>Last Name</strong>
+            </label>
+            <input type="text" id="userLastName" placeholder="Last Name" name="userLastName" required>
+
+            <label for="destinationCity">
+                <strong>Destination City</strong>
+            </label>
+            <input type="text" id="destinationCity" placeholder="Destination City" name="destinationCity">
+
+            <label for="email">
+                <strong>Email</strong>
+            </label>
+            <input type="text" id="email" placeholder="Email" name="email" required>
+
+            <label for="password">
+                <strong>Password</strong>
+            </label>
+            <input type="password" id="password" placeholder="Password" name="password" required>
+            
+            <button type="submit" class="btn" onclick="add()">Log in</button>
+          </form>
+        </div>
+      </div>
+
+      <form class="formContainer">
+        <h2>Update User</h2>
+        <label for="userFirstName">
+          <strong>First Name</strong>
+        </label>
+        <input type="text" id="userFirstName" placeholder="First Name" name="userFirstName" required>
+
+        <label for="userLastName">
+          <strong>Last Name</strong>
+        </label>
+        <input type="text" id="userLastName" placeholder="Last Name" name="userLastName" required>
+
+        <label for="destinationCity">
+            <strong>Destination City</strong>
+        </label>
+        <input type="text" id="destinationCity" placeholder="Destination City" name="destinationCity">
+
+        <label for="email">
+            <strong>Email</strong>
+        </label>
+        <input type="text" id="email" placeholder="Email" name="email" required>
+
+        <label for="password">
+            <strong>Password</strong>
+        </label>
+        <input type="password" id="password" placeholder="Password" name="password" required>
+        
+        <button type="submit" class="btn" onclick="update()">UPDATE</button>
+      </form>
+
     <button id="button" onclick="add()">Add</button>
     <button id="button" onclick="deleteOne()">Delete</button>
     <button id="button" onclick="update()">Update</button>

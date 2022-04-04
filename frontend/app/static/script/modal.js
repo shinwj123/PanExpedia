@@ -1,11 +1,23 @@
+function openForm() {
+    let inputVal = document.getElementById("email").value;
+    alert(inputVal);
+    
+}
+function closeForm() {
+    document.getElementById("popupForm").style.display = "none";
+}
+
 function add() {
+    let firstName = document.getElementById("userFirstName").value;
+    let lastName = document.getElementById("userLastName").value;
+    let destCity = document.getElementById("destinationCity").value;
+    let email = document.getElementById("email").value;
+    let pass = document.getElementById("password").value;
+    alert(firstName);
     $.ajax({
         type: 'POST',
-        url: '/create',
+        url: '/create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,
         contentType: 'application/jason;charset=UTF-8',
-        // data: JSON.stringify({
-        //     'description': 'Create a new user'
-        // }),
         success: function (res) {
             console.log(res.response)
             location.reload();
@@ -33,9 +45,14 @@ function deleteOne() {
 };
 
 function update() {
+    let firstName = document.getElementById("userFirstName").value;
+    let lastName = document.getElementById("userLastName").value;
+    let destCity = document.getElementById("destinationCity").value;
+    let email = document.getElementById("email").value;
+    let pass = document.getElementById("password").value;
     $.ajax({
         type: 'POST',
-        url: '/update',
+        url: '/update?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,
         contentType: 'application/jason;charset=UTF-8',
         success: function (res) {
             console.log(res.response);
