@@ -13,6 +13,7 @@ def fetch_todo() -> dict:
     #conn.execute(query)
     query = conn.execute("Select * from UserProfile;").fetchall()
     conn.close()
+
     users = []
     for result in query:
         item = {
@@ -28,7 +29,7 @@ def update(task_id: int, text: str) -> None:
     pass
 
 def update_status_entry(task_id: int, text: str) -> None:
-    
+    pass
 
 def insert_new_task(text: str) ->  int:
     conn = db.connect()
@@ -52,3 +53,18 @@ def remove_task_by_id(task_id: int) -> None:
     conn.execute(query)
     task_id = 2
     conn.close()
+
+def search_db() -> None:
+    conn = db.connect()
+    query = 'SELECT * FROM CountryData WHERE country="Iraq";'
+    results = conn.execute(query)
+    conn.close()
+    res = []
+    for r in results:
+        item = {
+            "country": r[0],
+            "population": r[2]
+        }
+        res.append(item)
+
+    return res

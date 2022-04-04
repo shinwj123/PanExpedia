@@ -60,9 +60,15 @@ def create():
     #return redirect(url_for('results'))
     return jsonify(result)
 
+@app.route("/search", methods=['POST'])
+def search():
+    db_helper.search_db()
+    result = {'success': True, 'response': 'Done'}
+    return jsonify(result)
 
 @app.route("/")
 def homepage():
     """ returns rendered homepage """
     items = db_helper.fetch_todo()
-    return render_template("index.html", items=items)
+    res = db_helper.search_db()
+    return render_template("index.html", items=items, res=res)

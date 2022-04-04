@@ -1,4 +1,4 @@
-function search() {
+function add() {
     $.ajax({
         type: 'POST',
         url: '/create',
@@ -37,6 +37,20 @@ function update() {
         type: 'POST',
         url: '/update',
         contentType: 'application/jason;charset=UTF-8',
+        success: function (res) {
+            console.log(res.response);
+            location.reload();
+        },
+        error: function() {
+            console.log('Error');
+        }
+    });
+};
+
+function search() {
+    $.ajax({
+        type:'POST',
+        url: '/search',
         success: function (res) {
             console.log(res.response);
             location.reload();
