@@ -45,11 +45,12 @@ function deleteOne() {
 };
 
 function update() {
-    let firstName = document.getElementById("userFirstName").value;
-    let lastName = document.getElementById("userLastName").value;
-    let destCity = document.getElementById("destinationCity").value;
-    let email = document.getElementById("email").value;
-    let pass = document.getElementById("password").value;
+    let firstName = document.getElementById("userFirstNameUpdate").value;
+    let lastName = document.getElementById("userLastNameUpdate").value;
+    let destCity = document.getElementById("destinationCityUpdate").value;
+    let email = document.getElementById("emailUpdate").value;
+    let pass = document.getElementById("passwordUpdate").value;
+    alert(firstName)
     $.ajax({
         type: 'POST',
         url: '/update?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,

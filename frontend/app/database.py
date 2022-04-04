@@ -27,6 +27,7 @@ def fetch_todo() -> dict:
 
 def update(fn: str, ln: str, dc: str, email: str, p: str) -> None:
     conn = db.connect()
+    print("hereeee")
     print(fn)
     print(email)
     query = 'UPDATE UserProfile SET userFirstName="'+fn+'", userLastName="'+ln+'", destinationCity="'+dc+'", password="'+p+'" WHERE email="'+email+'";'.format(fn, ln, dc, p, email)
