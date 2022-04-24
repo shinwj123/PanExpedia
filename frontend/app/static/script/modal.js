@@ -1,6 +1,5 @@
 function openForm() {
     let inputVal = document.getElementById("email").value;
-    alert(inputVal);
     
 }
 function closeForm() {
@@ -8,24 +7,31 @@ function closeForm() {
 }
 
 function add() {
+    alert("OENIS");
     let firstName = document.getElementById("userFirstName").value;
     let lastName = document.getElementById("userLastName").value;
     let destCity = document.getElementById("destinationCity").value;
     let email = document.getElementById("email").value;
     let pass = document.getElementById("password").value;
-    alert(firstName);
-    $.ajax({
-        type: 'POST',
-        url: '/create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,
-        contentType: 'application/jason;charset=UTF-8',
-        success: function (res) {
-            console.log(res.response)
-            location.reload();
-        },
-        error: function() {
-            console.log('Error');
-        }
-    });
+    alert("email");
+    var url = window.location.href;
+    var len = url.length;
+    url = url.slice(0, len-6)
+    url =  url + 'create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass
+    window.location = (url);
+    alert(url);
+    // $.ajax({
+    //     type: 'POST',
+    //     url: '/create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,
+    //     contentType: 'application/jason;charset=UTF-8',
+    //     success: function (res) {
+    //         console.log(res.response);
+    //         location.reload();
+    //     },
+    //     error: function() {
+    //         console.log('Error');
+    //     }
+    // });
     console.log("Done with ajax");
 };
 
@@ -51,7 +57,6 @@ function update() {
     let destCity = document.getElementById("destinationCityUpdate").value;
     let email = document.getElementById("emailUpdate").value;
     let pass = document.getElementById("passwordUpdate").value;
-    alert(firstName)
     $.ajax({
         type: 'POST',
         url: '/update?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,
@@ -79,6 +84,25 @@ function search() {
         }
     });
 };
+
+function loginRedirect() {
+    window.location = (window.location.href + 'login'); 
+    // $.ajax({
+    //     type: 'POST',
+    //     url: '/login',
+    //     success: function (res) {
+    //         console.log(res.response);
+    //         location.reload();
+    //     },
+    //     error: function() {
+    //         console.log('Error');
+    //     }
+    // });
+};
+
+function signUpRedirect() {
+    window.location = (window.location.href + 'signup');
+}
 
 // $(document).ready(function () {
 //     // example: https://getbootstrap.com/docs/4.2/components/modal/

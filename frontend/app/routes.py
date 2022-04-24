@@ -1,7 +1,11 @@
 """ Specifies routing for the application"""
-from flask import render_template, request, jsonify, redirect
+#from flask import render_template, request, jsonify, redirect
 from app import app
 from app import database as db_helper
+from flask import Flask, render_template, render_template_string, request, session, redirect, url_for, jsonify
+
+app.secret_key = 'BAD_SECRET_KEY'
+
 
 @app.route("/delete/", methods=['POST'])
 def delete():
@@ -46,6 +50,7 @@ def update():
 
 @app.route("/create", methods=['POST'])
 def create():
+    print("hereerereEREWR")
     """ recieves post requests to add new task """
     db_helper.insert_new_user(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), request.args.get('email'), request.args.get('pass'))
     print("here 2")
@@ -60,7 +65,7 @@ def search():
     print("SUCCESS?")
     return render_template("country.html", res=res)
 
-@app.route("/home", methods=['GET', 'POST'])
+@app.route("/country", methods=['GET', 'POST'])
 def home():
     print('HERE')
     name = request.form['name']
@@ -93,3 +98,20 @@ def vaccinationRate():
     res = db_helper.getVaxRate()
     print(res)
     return render_template("vaccinationrate.html", res_=res)
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # Save the form data to the session object
+        session['email'] = request.form['email_address']
+        #print()
+        return redirect('/')
+    return render_template("login.html")
+
+@app.route("/signup", methods=['GET', 'POST'])
+def signup():
+    return render_template("signup.html")
+
+
+
+        

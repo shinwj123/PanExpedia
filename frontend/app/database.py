@@ -57,7 +57,7 @@ def remove_user_by_email(email: str) -> None:
 
 def search_db(c: str) -> None:
     conn = db.connect()
-    query = 'SELECT * FROM CountryData WHERE country="{}";'.format(c)
+    query = 'SELECT * FROM CountryData WHERE country LIKE "%%{}%%";'.format(c)
     results = conn.execute(query)
     conn.close()
     res = []

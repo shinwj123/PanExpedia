@@ -20,9 +20,13 @@
 
     <body>
 
+    {% if session['email'] %}
+      <h1>Welcome {{ session['email'] }}!</h1>
+    {%endif%}
+
     <main role="main" class="container extra-bottom">
-      <h1 class="mt-5">TODO List Demo App</h1>
-      <p><mark>Do it now.</mark></p>
+      <h1 class="mt-5">PanExpedia</h1>
+      <p><mark>We're the best, don't listen to anyone else</mark></p>
     </main>
     
 
@@ -63,8 +67,8 @@
     <table class="table">
         <thead>
         <tr>
-            <th class="task-id">#</th>
-            <th class="task">Task Name</th>
+            <th class="task-id">Email</th>
+            <th class="task">City</th>
             <th class="status">Status</th>
             <th class="update">Edit</th>
             <th class="update">Remove</th>
@@ -97,39 +101,8 @@
     </table>
     </div>
 
-    <div class="loginPopup">
-        <div class="formPopup" id="popupForm">
-          <form class="formContainer">
-            <h2>ADD USER</h2>
-            <label for="userFirstName">
-              <strong>First Name</strong>
-            </label>
-            <input type="text" id="userFirstName" placeholder="First Name" name="userFirstName" required>
-
-            <label for="userLastName">
-              <strong>Last Name</strong>
-            </label>
-            <input type="text" id="userLastName" placeholder="Last Name" name="userLastName" required>
-
-            <label for="destinationCity">
-                <strong>Destination City</strong>
-            </label>
-            <input type="text" id="destinationCity" placeholder="Destination City" name="destinationCity">
-
-            <label for="email">
-                <strong>Email</strong>
-            </label>
-            <input type="text" id="email" placeholder="Email" name="email" required>
-
-            <label for="password">
-                <strong>Password</strong>
-            </label>
-            <input type="password" id="password" placeholder="Password" name="password" required>
-            
-            <button type="submit" class="btn" onclick="add()">Log in</button>
-          </form>
-        </div>
-      </div>
+    <button id="button" onclick="loginRedirect()">Login</button>
+    <button id="button" onclick="signUpRedirect()">Sign Up</button>
 
       <form class="formContainer">
         <h2>Update User</h2>
@@ -184,10 +157,10 @@
     </form>
 
 
-    <!-- {% for item in res %} 
+    {% for item in res %} 
     <p>{{item.country}}</p>
     <p>{{item.population}}</p>
-    {% endfor %} -->
+    {% endfor %}
 
 
     <footer class="footer">
