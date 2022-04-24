@@ -100,3 +100,24 @@ def getVaxRate():
         res.append(item)
 
     return res
+
+def login(email: str, p: str):
+    conn = db.connect()
+    query = 'select CASE WHEN count(1) > 0 THEN "true" ELSE "false" END from UserProfile where email = "{}"'.format(email)
+    results = conn.execute(query)
+    conn.close()
+    res = []
+    for r in results:
+        item = {
+            "email_exists": r[0]
+        }
+        res.append(item)
+    #valid = results[0][0]
+    v = res[0]["email_exists"]
+    valid = False
+    if (v == 'true'):
+        valid = True
+    print(valid)
+    return valid
+    #return valid
+    

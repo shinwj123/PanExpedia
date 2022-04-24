@@ -22,6 +22,8 @@
 
     {% if session['email'] %}
       <h1>Welcome {{ session['email'] }}!</h1>
+    {%else%}
+      <h1>Welcome</h1>
     {%endif%}
 
     <main role="main" class="container extra-bottom">

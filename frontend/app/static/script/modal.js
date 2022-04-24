@@ -17,21 +17,23 @@ function add() {
     var url = window.location.href;
     var len = url.length;
     url = url.slice(0, len-6)
-    url =  url + 'create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass
+    //url =  url + 'create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass
     window.location = (url);
     alert(url);
-    // $.ajax({
-    //     type: 'POST',
-    //     url: '/create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,
-    //     contentType: 'application/jason;charset=UTF-8',
-    //     success: function (res) {
-    //         console.log(res.response);
-    //         location.reload();
-    //     },
-    //     error: function() {
-    //         console.log('Error');
-    //     }
-    // });
+    url =  url + 'create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass;
+    window.location = (url);
+    alert(url);
+    $.ajax({
+        type: 'POST',
+        url: '/create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,
+        contentType: 'application/jason;charset=UTF-8',
+        success: function (res) {
+            console.log(res.response);
+        },
+        error: function() {
+            console.log('Error');
+        }
+    });
     console.log("Done with ajax");
 };
 

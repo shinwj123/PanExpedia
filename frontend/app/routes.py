@@ -44,19 +44,19 @@ def update():
     """ recieves post requests to add new task """
     db_helper.update(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), request.args.get('email'), request.args.get('pass'))
     result = {'success': True, 'response': 'Done'}
-    #return redirect(url_for('results'))
-    return jsonify(result)
+    return redirect('/')
     
 
-@app.route("/create", methods=['POST'])
+@app.route("/create", methods=['GET', 'POST'])
 def create():
     print("hereerereEREWR")
     """ recieves post requests to add new task """
+    session['email'] = request.args.get('email')
     db_helper.insert_new_user(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), request.args.get('email'), request.args.get('pass'))
     print("here 2")
     result = {'success': True, 'response': 'Done'}
-    #return redirect(url_for('results'))
-    return jsonify(result)
+    return redirect('/')
+    #return jsonify(result)
 
 @app.route("/search", methods=['POST'])
 def search():
@@ -74,7 +74,7 @@ def home():
     print(res)
     return render_template("country.html", res=res)
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def homepage():
     """ returns rendered homepage """
     items = db_helper.fetch_todo()
@@ -101,12 +101,13 @@ def vaccinationRate():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
+    if request.method=='POST':
         # Save the form data to the session object
         session['email'] = request.form['email_address']
-        #print()
+        db_helper.login(request.form['email_address'], request.form['password'])
         return redirect('/')
-    return render_template("login.html")
+    else:
+        return render_template("login.html")
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
