@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Signup</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    button {
+      background: transparent;
+      border: 0 none;
+    }
+  </style>
+  <script src="{{ url_for('static', filename='script/modal.js') }}"></script>
+
+</head>
+
+<body background="{{ url_for('static', filename='script/plane.jpeg') }}">
+  <button onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
+      width="250" height="150"></button>
+  <h1>UPDATE</h1>
+  <form class="formContainer">
+    <h2>Update User</h2>
+    <label for="userFirstName">
+      <strong>First Name</strong>
+    </label>
+    <input type="text" id="userFirstNameUpdate" placeholder="First Name" name="userFirstName" required>
+
+    <label for="userLastName">
+      <strong>Last Name</strong>
+    </label>
+    <input type="text" id="userLastNameUpdate" placeholder="Last Name" name="userLastName" required>
+
+    <label for="destinationCity">
+        <strong>Destination City</strong>
+    </label>
+    <input type="text" id="destinationCityUpdate" placeholder="Destination City" name="destinationCity">
+
+    <label for="email">
+        <strong>Email</strong>
+    </label>
+    <input type="text" id="emailUpdate" placeholder="Email" name="email" required>
+
+    <label for="password">
+        <strong>Password</strong>
+    </label>
+    <input type="password" id="passwordUpdate" placeholder="Password" name="password" required>
+    
+    <button type="submit" class="btn" onclick="update()">UPDATE</button>
+  </form>
+</body>
+
+</html>

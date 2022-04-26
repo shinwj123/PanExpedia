@@ -115,7 +115,7 @@ function userProfileRedirect() {
     url = (window.location.href + 'userprofile');
     alert(url);
     window.location = url; 
-}
+};
 
 // $(document).ready(function () {
 //     // example: https://getbootstrap.com/docs/4.2/components/modal/

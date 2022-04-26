@@ -12,17 +12,22 @@
       background-repeat: no-repeat;
       background-size: cover;
     }
+    button {
+      background: transparent;
+      border: 0 none;
+    }
   </style>
   <script src="{{ url_for('static', filename='script/modal.js') }}"></script>
 
 </head>
 
 <body background="{{ url_for('static', filename='script/plane.jpeg') }}">
-  <h1>HELLO</h1>
-  <div class="signupPopup">
+  <button onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
+      width="250" height="150"></button>
+  <h1>SIGN UP</h1>
+  <div class="loginPopup">
     <div class="formPopup" id="popupForm">
       <form action="/create" method="POST"></form>
-      <h2>ADD USER</h2>
       <label for="userFirstName">
         <strong>First Name</strong>
       </label>
@@ -41,14 +46,14 @@
       <label for="email">
         <strong>Email</strong>
       </label>
-      <input type="test" id="email" name="email_address" required />
+      <input type="test" id="email" placeholder="Email" name="email_address" required />
 
       <label for="password">
         <strong>Password</strong>
       </label>
       <input type="password" id="password" placeholder="Password" name="password" required>
 
-      <button class="btn" onclick="add()">Create User</button>
+      <button class="btn" onclick="add()"><u>Create User</u></button>
       </form>
     </div>
   </div>
