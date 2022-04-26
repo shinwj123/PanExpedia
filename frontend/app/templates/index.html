@@ -2,8 +2,6 @@
 
 <html>
     <head>
-        <title>PanExpedia</title>
-
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -35,14 +33,23 @@
     {%endif%}
 
     <main role="main" class="container extra-bottom">
-      <h1 class="mt-5">PanExpedia</h1>
+      <button class="button button0" onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
+        width="250" height="150">
+      </button>
       <p><mark>We're the best, don't listen to anyone else</mark></p>
+      <style>
+        .button0 {
+          background: transparent;
+          border: 0 none;
+        }
+      </style>
     </main>
     
 
-    <div class="container">    
+     <div class="container">    
         
         <!-- Button trigger modal -->
+        <!--
         <div style="text-align: right;">
         <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#task-modal" data-source="New Task">Add Task</button>
         </div>
@@ -71,8 +78,10 @@
         </div>
 
     </div>
+  -->
 
     <!--Todo Table-->
+    <!--
     <div class="container table-responsive">          
     <table class="table">
         <thead>
@@ -109,7 +118,8 @@
         
         </tbody>
     </table>
-    </div>
+    </div> 
+  -->
 
     <style>
       .login {
@@ -139,21 +149,38 @@
       .button2 {
         background-color: white; 
         color: black; 
-        border: 2px solid #008CBA;
+        border: 2px solid #4CAF50;
       }
       
       .button2:hover {
-        background-color: #008CBA;
+        background-color: #4CAF50;
+        color: white;
+      }
+
+      .button3 {
+        background-color: white; 
+        color: black; 
+        border: 2px solid #4CAF50;
+      }
+      
+      .button3:hover {
+        background-color: #4CAF50;
         color: white;
       }
       
       </style>
 
-    <div style = "position:relative;left:80px;top:5px;background-color:yellow;">
+    <div style = "position:relative;left:850px;bottom:250px">
       <button class="button button1" onclick="loginRedirect()">Login</button>
      </div>
-    
-    <button class="button button2" onclick="signUpRedirect()">Sign Up</button>
+
+    <div style = "position:relative;left:910px;bottom:280px">
+      <button class="button button2" onclick="signUpRedirect()">Sign Up</button>
+    </div>
+
+    <div style = "position:relative;left:985px;bottom:310px">
+      <button class="button button3" onclick="userProfileRedirect()">User Profile</button>
+    </div>
 
       <form class="formContainer">
         <h2>Update User</h2>

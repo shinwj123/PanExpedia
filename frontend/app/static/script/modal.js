@@ -109,6 +109,12 @@ function signUpRedirect() {
     url = (window.location.href + 'signup');
     alert(url);
     window.location = url; 
+};
+
+function userProfileRedirect() {
+    url = (window.location.href + 'userprofile');
+    alert(url);
+    window.location = url; 
 }
 
 // $(document).ready(function () {

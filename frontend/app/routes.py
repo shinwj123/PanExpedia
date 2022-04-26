@@ -119,6 +119,10 @@ def login():
 def signup():
     return render_template("signup.html")
 
+@app.route("/userprofile", methods=['GET', 'POST'])
+def userprofile():
+    return render_template("userprofile.html")
+
 
 
         
