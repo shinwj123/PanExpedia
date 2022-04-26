@@ -7,10 +7,19 @@
     </head>
 
     <body>
-        {% for item in res %} 
+        {% for item in country_res %} 
             <h1>{{item.country}}</h1>
             <h1>Population: {{item.population}}</h1>
         {% endfor %}
+        <h1>Airports</h1>
+        {% for item in airport_res %}
+            <h3>{{item.airport_name}}</h3>
+            <h3>{{item.airport_code}}</h3>
+        {% endfor %}
+
+
+
+        <h1>Rate: {{rate}}</h1>
 
         <!-- <button id="backButton">Return Home</button> -->
     </body>
