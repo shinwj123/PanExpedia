@@ -7,33 +7,33 @@ function closeForm() {
 }
 
 function add() {
-    alert("OENIS");
+    alert("HERE");
     let firstName = document.getElementById("userFirstName").value;
     let lastName = document.getElementById("userLastName").value;
     let destCity = document.getElementById("destinationCity").value;
     let email = document.getElementById("email").value;
     let pass = document.getElementById("password").value;
-    alert("email");
     var url = window.location.href;
     var len = url.length;
     url = url.slice(0, len-6)
-    //url =  url + 'create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass
     window.location = (url);
-    alert(url);
     url =  url + 'create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass;
-    window.location = (url);
+    //url = url + 'create';
     alert(url);
-    $.ajax({
-        type: 'POST',
-        url: '/create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,
-        contentType: 'application/jason;charset=UTF-8',
-        success: function (res) {
-            console.log(res.response);
-        },
-        error: function() {
-            console.log('Error');
-        }
-    });
+    window.location = (url);
+    
+    //window.location = (url);
+    // $.ajax({
+    //     type: 'POST',
+    //     url: '/create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,
+    //     contentType: 'application/jason;charset=UTF-8',
+    //     success: function (res) {
+    //         console.log(res.response);
+    //     },
+    //     error: function() {
+    //         console.log('Error');
+    //     }
+    // });
     console.log("Done with ajax");
 };
 
@@ -88,7 +88,10 @@ function search() {
 };
 
 function loginRedirect() {
-    window.location = (window.location.href + 'login'); 
+    url = (window.location.href + 'login'); 
+    alert(window.location.href);
+    alert(url);
+    window.location = url;
     // $.ajax({
     //     type: 'POST',
     //     url: '/login',
@@ -103,7 +106,9 @@ function loginRedirect() {
 };
 
 function signUpRedirect() {
-    window.location = (window.location.href + 'signup');
+    url = (window.location.href + 'signup');
+    alert(url);
+    window.location = url; 
 }
 
 // $(document).ready(function () {

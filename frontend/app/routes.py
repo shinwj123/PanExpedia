@@ -42,7 +42,8 @@ def bad(task_id):
 @app.route("/update", methods=['POST'])
 def update():
     """ recieves post requests to add new task """
-    db_helper.update(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), request.args.get('email'), request.args.get('pass'))
+    
+    db_helper.update(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), session["email"], request.args.get('pass'))
     result = {'success': True, 'response': 'Done'}
     return redirect('/')
     
@@ -52,7 +53,8 @@ def create():
     print("hereerereEREWR")
     """ recieves post requests to add new task """
     session['email'] = request.args.get('email')
-    db_helper.insert_new_user(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), request.args.get('email'), request.args.get('pass'))
+    print(request.args.get('first'))
+    task = db_helper.insert_new_user(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), request.args.get('email'), request.args.get('pass'))
     print("here 2")
     result = {'success': True, 'response': 'Done'}
     return redirect('/')
@@ -70,7 +72,7 @@ def home():
     print('HERE')
     name = request.form['name']
     print(name)
-    res = db_helper.search_db(name)
+    res = db_helper.search_country(name)
     print(res)
     return render_template("country.html", res=res)
 
@@ -104,8 +106,11 @@ def login():
     if request.method=='POST':
         # Save the form data to the session object
         session['email'] = request.form['email_address']
-        db_helper.login(request.form['email_address'], request.form['password'])
-        return redirect('/')
+        valid = db_helper.login(request.form['email_address'], request.form['password'])
+        if (valid):
+            return redirect('/')
+        else:
+            print("INVALID")
     else:
         return render_template("login.html")
 

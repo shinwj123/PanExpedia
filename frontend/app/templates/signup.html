@@ -15,7 +15,7 @@
       <h1>HELLO</h1>
         <div class="loginPopup">
             <div class="formPopup" id="popupForm">
-              <form class="formContainer" method="post">
+              <form action="/create" method="POST"></form>
                 <h2>ADD USER</h2>
                 <label for="userFirstName">
                   <strong>First Name</strong>
@@ -35,14 +35,14 @@
                 <label for="email">
                     <strong>Email</strong>
                 </label>
-                <input type="email" id="email" name="email_address" required />
+                <input type="test" id="email" name="email_address" required />
     
                 <label for="password">
                     <strong>Password</strong>
                 </label>
                 <input type="password" id="password" placeholder="Password" name="password" required>
                 
-                <button type="submit" class="btn" onclick="add()">Create User</button>
+                <button class="btn" onclick="add()">Create User</button>
               </form>
             </div>
           </div>

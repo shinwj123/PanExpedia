@@ -30,16 +30,27 @@ def update(fn: str, ln: str, dc: str, email: str, p: str) -> None:
     print("hereeee")
     print(fn)
     print(email)
-    query = 'UPDATE UserProfile SET userFirstName="'+fn+'", userLastName="'+ln+'", destinationCity="'+dc+'", password="'+p+'" WHERE email="'+email+'";'.format(fn, ln, dc, p, email)
-    #query = 'UPDATE UserProfile SET userFirstName="steven", userLastName="james", destinationCity="Chicago", password="asdf" WHERE email="tejal";'
-    print("ARE YOU THERE")
-    conn.execute(query)
+    query = '''CREATE TRIGGER UpdateTrig
+                 BEFORE UPDATE ON UserProfile
+                 FOR EACH ROW
+                 BEGIN
+                   SET @city = (SELECT airportCity FROM AirportData WHERE airportCity = new.destinationCity );
+                 IF @city IS NULL THEN
+                   SET new.destinationCity = "INVALID";
+                 END IF;
+                 END; 
+                 '''
+    #results = conn.execute(query)
+    query = 'UPDATE UserProfile SET userFirstName="{}", userLastName="{}", destinationCity="{}", password="{}" WHERE email="{}";'.format(fn, ln, dc, p, email)
+    print(query)
+    results = conn.execute(query)
     conn.close()
+    print(results)
+    return results
 
-def update_status_entry(task_id: int, text: str) -> None:
-    pass
 
 def insert_new_user(fn: str, ln: str, dc: str, email: str, p: str) ->  int:
+    print("HEHEHEHE")
     conn = db.connect()
     print("Within db")
     query = 'INSERT INTO UserProfile (userFirstName, userLastName, destinationCity, email, password) VALUES ("{}", "{}", "{}", "{}", "{}");'.format(fn, ln, dc, email, p)
@@ -57,7 +68,9 @@ def remove_user_by_email(email: str) -> None:
 
 def search_db(c: str) -> None:
     conn = db.connect()
-    query = 'SELECT * FROM CountryData WHERE country LIKE "%%{}%%";'.format(c)
+    query = '''SELECT * 
+               FROM CountryData 
+               WHERE country LIKE "%%{}%%";'''.format(c)
     results = conn.execute(query)
     conn.close()
     res = []
@@ -116,8 +129,23 @@ def login(email: str, p: str):
     v = res[0]["email_exists"]
     valid = False
     if (v == 'true'):
-        valid = True
-    print(valid)
+        conn = db.connect()
+        query = 'SELECT password FROM UserProfile WHERE email="{}"'.format(email)
+        results = conn.execute(query)
+        conn.close()
+        res = []
+        for r in results:
+            item = {
+                "pass": r[0]
+            }
+            res.append(item)
+        if (res[0]["pass"] == p):
+            valid = True
+        else:
+            valid = False
+
     return valid
-    #return valid
     
+def search_country(c: str):
+    res = search_db(c)
+    return res
