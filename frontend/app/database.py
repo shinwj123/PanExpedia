@@ -142,8 +142,11 @@ def login(email: str, p: str):
         if (res[0]["pass"] == p):
             valid = True
         else:
+            print("HERE")
             valid = False
-
+    else:
+        return valid
+    print("VALID: " + str(valid))
     return valid
     
 def search_country(c: str):

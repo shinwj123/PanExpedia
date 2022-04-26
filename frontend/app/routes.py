@@ -111,8 +111,9 @@ def login():
             return redirect('/')
         else:
             print("INVALID")
+            return render_template("login.html", message=True)
     else:
-        return render_template("login.html")
+        return render_template("login.html", message=False)
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():

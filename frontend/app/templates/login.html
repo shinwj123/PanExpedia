@@ -5,7 +5,14 @@
 
     </head>
 
-    <body>
+    <body onload="incorrectLogin()">
+      <script>
+        function incorrectLogin() {
+          if ("{{ message }}" == "True") {
+            alert("Incorrect username or password");
+          }
+        }
+      </script>
       <h1>HELLO</h1>
         <div class="loginPopup">
             <div class="formPopup" id="popupForm">
