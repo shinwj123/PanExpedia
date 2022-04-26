@@ -1,50 +1,62 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>Login</title>
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title>Signup</title>
 
-        <script src="{{ url_for('static', filename='script/modal.js') }}"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    button {
+      background: transparent;
+      border: 0 none;
+    }
+  </style>
+  <script src="{{ url_for('static', filename='script/modal.js') }}"></script>
 
-    </head>
+</head>
 
-    <body>
-      <h1>HELLO</h1>
-        <div class="loginPopup">
-            <div class="formPopup" id="popupForm">
-              <form action="/create" method="POST"></form>
-                <h2>ADD USER</h2>
-                <label for="userFirstName">
-                  <strong>First Name</strong>
-                </label>
-                <input type="text" id="userFirstName" placeholder="First Name" name="userFirstName" required>
-    
-                <label for="userLastName">
-                  <strong>Last Name</strong>
-                </label>
-                <input type="text" id="userLastName" placeholder="Last Name" name="userLastName" required>
-    
-                <label for="destinationCity">
-                    <strong>Destination City</strong>
-                </label>
-                <input type="text" id="destinationCity" placeholder="Destination City" name="destinationCity">
-    
-                <label for="email">
-                    <strong>Email</strong>
-                </label>
-                <input type="test" id="email" name="email_address" required />
-    
-                <label for="password">
-                    <strong>Password</strong>
-                </label>
-                <input type="password" id="password" placeholder="Password" name="password" required>
-                
-                <button class="btn" onclick="add()">Create User</button>
-              </form>
-            </div>
-          </div>
-    </body>
+<body background="{{ url_for('static', filename='script/plane.jpeg') }}">
+  <button onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
+      width="250" height="150"></button>
+  <h1>SIGN UP</h1>
+  <div class="loginPopup">
+    <div class="formPopup" id="popupForm">
+      <form action="/create" method="POST"></form>
+      <label for="userFirstName">
+        <strong>First Name</strong>
+      </label>
+      <input type="text" id="userFirstName" placeholder="First Name" name="userFirstName" required>
+
+      <label for="userLastName">
+        <strong>Last Name</strong>
+      </label>
+      <input type="text" id="userLastName" placeholder="Last Name" name="userLastName" required>
+
+      <label for="destinationCity">
+        <strong>Destination City</strong>
+      </label>
+      <input type="text" id="destinationCity" placeholder="Destination City" name="destinationCity">
+
+      <label for="email">
+        <strong>Email</strong>
+      </label>
+      <input type="test" id="email" placeholder="Email" name="email_address" required />
+
+      <label for="password">
+        <strong>Password</strong>
+      </label>
+      <input type="password" id="password" placeholder="Password" name="password" required>
+
+      <button class="btn" onclick="add()"><u>Create User</u></button>
+      </form>
+    </div>
+  </div>
+</body>
+
 </html>
