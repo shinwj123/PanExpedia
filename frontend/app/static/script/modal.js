@@ -111,6 +111,11 @@ function userProfileRedirect() {
     window.location = url; 
 };
 
+function moreDetails() {
+    url = (window.location.href + 'moreDetails'); 
+    window.location = url;
+};
+
 // $(document).ready(function () {
 //     // example: https://getbootstrap.com/docs/4.2/components/modal/
 //     // show modal

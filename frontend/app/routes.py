@@ -122,6 +122,10 @@ def signup():
 def userprofile():
     return render_template("userprofile.html")
 
+@app.route("/countrymoreDetail", methods=['GET', 'POST'])
+def moreDetails():
+    return render_template("moreDetails.html")
+
 
 
         
