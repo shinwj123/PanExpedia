@@ -257,3 +257,20 @@ def getDestinationCity(email):
     city = res[0]["destinationcity"]
 
     return city
+
+def createReview(destinationCity, email, numRating, review):
+    conn = db.connect()
+    query = 'SELECT airportName FROM AirportData WHERE airportCity="{}"'.format(destinationCity)
+    results = conn.execute(query)
+    res = []
+    for r in results:
+        item = {
+            "name": r[0]
+        }
+        res.append(item)
+    name = res[0]['name'] # Airport name
+    print("name")
+
+    query = 'INSERT INTO Ratings (email, airportName, review, rating) VALUES ("{}", "{}", "{}", "{}", "{}");'.format(email, name, review, numRating)
+    conn.execute(query)
+    conn.close()
