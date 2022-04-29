@@ -26,6 +26,14 @@
       width="250" height="150"></button>
 
 
+
+    {% if city is defined %}
+      
+    {% else %}
+    <script type="text/javascript">
+      showDestinationCity();
+    </script>
+    {% endif %}
   
 
   <h1>UPDATE</h1>
@@ -34,6 +42,8 @@
   {% if valid == "False" %}
   <script>alert("Invalid Destination City");</script>
   {% endif %}
+
+  
   <form class="formContainer"></form>
     <h2>Update User</h2>
     <label for="userFirstName">
@@ -63,6 +73,23 @@
 
     <button type="submit" class="btn" onclick="update()">UPDATE</button>
   </form>
+
+  <br>
+
+  <strong> Destination City : {{city}} </strong>
+
+  <br>
+
+  <h1>Rate an Airport!</h1>
+  <form>
+    <label for="numberRating">Rating of Airport from 1-10</label>
+    <input id="numberRating" type="number" min="1" max="10" />
+    <br>
+    <label for="review">Write a review!</label>
+    <textarea id="review" name="review" rows="10" cols="50"></textarea>
+    <button type="submit" class="btn" onclick="createRating()"><u>Submit Review</u></button>
+  </form>
+
   <br>
   <h2>Delete User</h2>
   <input type="text" id="deleteEmail" placeholder="Email to delete" required>

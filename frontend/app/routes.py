@@ -6,8 +6,6 @@ from flask import Flask, render_template, render_template_string, request, sessi
 
 app.secret_key = 'BAD_SECRET_KEY'
 
-validCity = "True"
-
 
 @app.route("/delete/", methods=['POST'])
 def delete():
@@ -49,12 +47,14 @@ def update():
         validCity = "False"
         return render_template("userprofile.html", valid="False")
     else:
+        session['destCity'] = request.args.get('destCity')
         return redirect('/')
     
 
 @app.route("/create", methods=['GET', 'POST'])
 def create():
     session['email'] = request.args.get('email')
+    session['destCity'] = request.args.get('destCity')
     task = db_helper.insert_new_user(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), request.args.get('email'), request.args.get('pass'))
     result = {'success': True, 'response': 'Done'}
     return redirect('/')
@@ -128,6 +128,35 @@ def moreDetails():
     res = db_helper.getmoreinfo()
     return render_template("moreDetails.html", res_ = res)
 
+@app.route("/countrymoreDetailgraphCases", methods=['GET', 'POST'])
+def graphCases():
+    db_helper.graphCases()
+    return render_template("cases.html")
 
+@app.route("/countrymoreDetailgraphTest", methods=['GET', 'POST'])
+def graphTest():
+    db_helper.graphTesting()
+    return render_template("test.html")
+
+@app.route("/countrymoreDetailgraphHosp", methods=['GET', 'POST'])
+def graphHosp():
+    db_helper.graphHosp()
+    return render_template("hosp.html")
+
+@app.route("/countrymoreDetailgraphVax", methods=['GET', 'POST'])
+def graphVax():
+    db_helper.graphVax()
+    return render_template("vax.html")
+
+@app.route("/showDestinationCity", methods=['GET','POST'])
+def showDestinationCity():
+    res = db_helper.getDestinationCity(session['email'])
+    return render_template("userprofile.html", valid = "True", city = res)
+
+@app.route("/createReview", methods=['GET', 'POST'])
+def createReview():
+    print("here")
+    db_helper.createReview(session['destCity'], session['email'], request.args.get('numRating'), request.args.get('review'))
+    return redirect('/userprofile')
 
         

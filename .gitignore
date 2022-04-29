@@ -1,2 +1,6 @@
 *.pyc
 __pycache__/ 
+templates/vax.html
+templates/hosp.html
+templates/test.html
+templates/cases.html

@@ -1,5 +1,8 @@
 from app import db
 from datetime import date, timedelta
+import plotly
+import plotly.graph_objs as go
+import pandas as pd
 
 curr_search = []
 
@@ -238,3 +241,184 @@ def getmoreinfo():
             res.append(item)
 
     return res
+
+def graphCases():
+    c = curr_search[0]
+    conn = db.connect()
+    query = 'SELECT date, newCaseNumber FROM CovidCases WHERE country = "{}"'.format(c)
+    results = conn.execute(query)
+    conn.close()
+    date = []
+
+    new = []
+    for r in results:
+        date.append(r[0])
+        new.append(r[1])
+
+    res = {"date":date, "newCaseNumber":new}
+    df = pd.DataFrame.from_dict(res)
+    # Create a trace
+    data = [go.Scatter(
+        x = df['date'],
+        y = df['newCaseNumber'],
+    )]
+    layout = go.Layout(
+            xaxis=dict(
+                title='Date',    
+            ),
+            yaxis=dict(
+                title='New Cases',  
+            )
+        )
+    title = c + "Covid Cases Over Time"
+    fig = go.Figure(data=data, layout=layout)
+    fig.update_yaxes(title_text="Covid Cases")
+    fig.update_xaxes(title_text="Time")
+    fig.update_layout(title_text=title)
+    #plotly.offline.plot(fig,filename='positives.html',config={'displayModeBar': True})
+    fig.write_html("app/templates/cases.html")
+    
+
+def graphTesting():
+    c = curr_search[0]
+    conn = db.connect()
+    query = 'SELECT date, newTestNumber FROM Testing WHERE country = "{}"'.format(c)
+    results = conn.execute(query)
+    conn.close()
+    date = []
+
+    new = []
+    for r in results:
+        date.append(r[0])
+        new.append(r[1])
+
+    res = {"date":date, "newTestNumber":new}
+    df = pd.DataFrame.from_dict(res)
+    # Create a trace
+    data = [go.Scatter(
+        x = df['date'],
+        y = df['newTestNumber'],
+    )]
+    layout = go.Layout(
+            xaxis=dict(
+                title='Date',    
+            ),
+            yaxis=dict(
+                title='New Tests',  
+            )
+        )
+    title = c + "Covid Testing Over Time"
+    fig = go.Figure(data=data, layout=layout)
+    fig.update_yaxes(title_text="New Tests")
+    fig.update_xaxes(title_text="Time")
+    fig.update_layout(title_text=title)
+    #plotly.offline.plot(fig,filename='testing.html',config={'displayModeBar': True})
+    fig.write_html("app/templates/test.html")
+
+def graphHosp():
+    c = curr_search[0]
+    conn = db.connect()
+    query = 'SELECT date, patientNumber FROM Hospitalization WHERE country = "{}"'.format(c)
+    results = conn.execute(query)
+    conn.close()
+    date = []
+
+    new = []
+    for r in results:
+        date.append(r[0])
+        new.append(r[1])
+
+    res = {"date":date, "patientNumber":new}
+    df = pd.DataFrame.from_dict(res)
+    # Create a trace
+    data = [go.Scatter(
+        x = df['date'],
+        y = df['patientNumber'],
+    )]
+    layout = go.Layout(
+            xaxis=dict(
+                title='Date',    
+            ),
+            yaxis=dict(
+                title='Number of Patients',  
+            )
+        )
+    title = c + "Covid Hospitalizations Over Time"
+    fig = go.Figure(data=data, layout=layout)
+    fig.update_yaxes(title_text="Hospitalizations")
+    fig.update_xaxes(title_text="Time")
+    fig.update_layout(title_text=title)
+    #plotly.offline.plot(fig,filename='hosp.html',config={'displayModeBar': True})
+    fig.write_html("app/templates/hosp.html")
+
+def graphVax():
+    c = curr_search[0]
+    conn = db.connect()
+    query = 'SELECT date, dailyVaccinationNumber FROM Vaccination WHERE country = "{}"'.format(c)
+    results = conn.execute(query)
+    conn.close()
+    date = []
+
+    new = []
+    for r in results:
+        date.append(r[0])
+        new.append(r[1])
+
+    res = {"date":date, "dailyVaccinationNumber":new}
+    df = pd.DataFrame.from_dict(res)
+    # Create a trace
+    data = [go.Scatter(
+        x = df['date'],
+        y = df['dailyVaccinationNumber'],
+    )]
+    layout = go.Layout(
+            xaxis=dict(
+                title='Date',    
+            ),
+            yaxis=dict(
+                title='Number of Vaccinations',  
+            )
+        )
+    title = c + "Covid Vaccinations Over Time"
+    fig = go.Figure(data=data, layout=layout)
+    fig.update_yaxes(title_text="Vaccinations")
+    fig.update_xaxes(title_text="Time")
+    fig.update_layout(title_text=title)
+    #plotly.offline.plot(fig,filename='vax.html',config={'displayModeBar': True})
+    fig.write_html("app/templates/vax.html")
+
+def getDestinationCity(email):
+    
+    conn = db.connect()
+    query = 'SELECT destinationCity FROM UserProfile WHERE email="{}"'.format(email)
+    results = conn.execute(query)
+    conn.close()
+    res = []
+    
+    for r in results:
+        item = {
+            "destinationcity": r[0]
+        }
+        
+        res.append(item)
+    
+    city = res[0]["destinationcity"]
+
+    return city
+
+def createReview(destinationCity, email, numRating, review):
+    conn = db.connect()
+    query = 'SELECT airportName FROM AirportData WHERE airportCity="{}"'.format(destinationCity)
+    results = conn.execute(query)
+    res = []
+    for r in results:
+        item = {
+            "name": r[0]
+        }
+        res.append(item)
+    name = res[0]['name'] # Airport name
+    print("name")
+
+    query = 'INSERT INTO Ratings (email, airportName, review, rating) VALUES ("{}", "{}", "{}", "{}", "{}");'.format(email, name, review, numRating)
+    conn.execute(query)
+    conn.close()

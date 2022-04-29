@@ -91,14 +91,40 @@ function userProfileRedirect() {
 function moreDetails() {
     url = (window.location.href + 'moreDetail'); 
     window.location = url;
-}
+};
 
 function about() {
     window.location = 'https://github-dev.cs.illinois.edu/sp22-cs411/sp22-cs411-team101-abduFormedTeam';
-}
+};
 
 function abdu() {
     window.location = 'https://cs.illinois.edu/about/people/faculty/alawini';
+};
+
+function showDestinationCity() {
+    var url = window.location.href;
+    var list = url.split("/");
+    
+    url = list[0] + "//" + list[2];
+    window.location = (url);
+
+    url =  url + '/showDestinationCity';
+    window.location = (url);
+};
+
+function createRating() {
+    numRating = document.getElementById("numberRating").value;
+    review = document.getElementById("review").value;
+
+    var url = window.location.href;
+    var list = url.split("/");
+    
+    url = list[0] + "//" + list[2];
+    window.location = (url);
+    alert(url);
+    url =  url + '/createReview?numRating='+numRating+'&review='+review;
+    alert(url);
+    window.location = (url);
 }
 
 // $(document).ready(function () {
