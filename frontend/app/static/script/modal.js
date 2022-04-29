@@ -112,7 +112,7 @@ function userProfileRedirect() {
 };
 
 function moreDetails() {
-    url = (window.location.href + 'moreDetails'); 
+    url = (window.location.href + 'moreDetail'); 
     window.location = url;
 };
 
