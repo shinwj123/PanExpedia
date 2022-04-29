@@ -16,6 +16,11 @@
           body {
             background-repeat: no-repeat;
             background-size: cover;
+            font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+          }
+          button {
+            background: transparent;
+            border: 0 none;
           }
         </style>
 
@@ -24,6 +29,7 @@
     </head>
 
     <body background="{{ url_for('static', filename='script/plane.jpeg') }}">
+
       <button class="button button0" onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
         width="250" height="150">
       </button>
@@ -231,7 +237,7 @@
     
     <!-- <button id="button" onclick="update()">Update</button> -->
     <!-- <main role="main" class="container extra-bottom"> -->
-      <div style = "position:relative;left:325px;bottom:-25px">
+      <div style = "position:relative;left:325px;bottom:-25px;solid black;padding:1.8%;">
       <form action="/country" method="POST">
         <p><input style="height:50px;font-size:20pt;" type = "text" name="name" placeholder=" Search country..." size="50"/></p>
         <!-- <p><input type = "submit" value = "Submit" /></p> -->

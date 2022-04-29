@@ -6,8 +6,10 @@ from flask import Flask, render_template, render_template_string, request, sessi
 
 app.secret_key = 'BAD_SECRET_KEY'
 
+validCity = "True"
 
-@app.route("/delete/", methods=['POST'])
+
+@app.route("/delete/", methods=['GET','POST'])
 def delete():
     """ recieved post requests for entry delete """
     try:
@@ -15,8 +17,8 @@ def delete():
         result = {'success': True, 'response': 'Removed task'}
     except:
         result = {'success': False, 'response': 'Something went wrong'}
-
-    return jsonify(result)
+    session['email'] = ""
+    return redirect('/')
 
 
 @app.route("/edit/<int:task_id>", methods=['POST'])
@@ -159,4 +161,9 @@ def createReview():
     db_helper.createReview(session['destCity'], session['email'], request.args.get('numRating'), request.args.get('review'))
     return redirect('/userprofile')
 
+@app.route("/countryairportratings/<airport>", methods=['GET', 'POST'])
+def getRatings(airport):
+    res = db_helper.getairportratings(airport)
+    print(res)
+    return render_template("ratings.html", res_=res)
         

@@ -11,6 +11,7 @@
     body {
       background-repeat: no-repeat;
       background-size: cover;
+      font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     }
     button {
       background: transparent;
@@ -34,16 +35,11 @@
       showDestinationCity();
     </script>
     {% endif %}
-  
-
-  <h1>UPDATE</h1>
-
 
   {% if valid == "False" %}
   <script>alert("Invalid Destination City");</script>
   {% endif %}
 
-  
   <form class="formContainer"></form>
     <h2>Update User</h2>
     <label for="userFirstName">
@@ -71,12 +67,12 @@
     </label>
     <input type="password" id="passwordUpdate" placeholder="Password" name="password" required>
 
-    <button type="submit" class="btn" onclick="update()">UPDATE</button>
+    <button class="button-1" role="button" type="submit" class="btn" onclick="update()">UPDATE</button>
   </form>
-
+   
   <br>
 
-  <strong> Destination City : {{city}} </strong>
+  <h2> Destination City : {{city}} </h2>
 
   <br>
 
@@ -87,13 +83,87 @@
     <br>
     <label for="review">Write a review!</label>
     <textarea id="review" name="review" rows="10" cols="50"></textarea>
-    <button type="submit" class="btn" onclick="createRating()"><u>Submit Review</u></button>
-  </form>
+    <button class="button-1" role="button" class="btn" onclick="createRating()"><u>Submit Review</u></button>
+
 
   <br>
+
   <h2>Delete User</h2>
   <input type="text" id="deleteEmail" placeholder="Email to delete" required>
-    <button id="button" onclick="deleteOne()">DELETE</button>
+  <button class="button-1" role="button" onclick="deleteOne()">DELETE</button>
+
+
+    <style>
+      .button-1 {
+        align-items: center;
+        appearance: none;
+        background-color: #fff;
+        border-radius: 24px;
+        border-style: none;
+        box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+        box-sizing: border-box;
+        color: #3c4043;
+        cursor: pointer;
+        display: inline-flex;
+        fill: currentcolor;
+        font-family: "Google Sans",Roboto,Arial,sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        height: 48px;
+        justify-content: center;
+        letter-spacing: .25px;
+        line-height: normal;
+        max-width: 100%;
+        overflow: visible;
+        padding: 2px 24px;
+        position: relative;
+        text-align: center;
+        text-transform: none;
+        transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: auto;
+        will-change: transform,opacity;
+        z-index: 0;
+      }
+
+      .button-1:hover {
+        background: #F6F9FE;
+        color: #174ea6;
+      }
+
+      .button-1:active {
+        box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+        outline: none;
+      }
+
+      .button-1:focus {
+        outline: none;
+        border: 2px solid #4285f4;
+      }
+
+      .button-1:not(:disabled) {
+        box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+      }
+
+      .button-1:not(:disabled):hover {
+        box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
+      }
+
+      .button-1:not(:disabled):focus {
+        box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+      }
+
+      .button-1:not(:disabled):active {
+        box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+      }
+
+      .button-1:disabled {
+        box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+      }
+
+    </style>
 
 </body>
 
