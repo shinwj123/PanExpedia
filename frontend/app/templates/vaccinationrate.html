@@ -6,6 +6,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
+        body {
+            background-repeat: no-repeat;
+            background-size: cover;
+            }
           button {
             background: transparent;
             border: 0 none;
@@ -15,16 +19,36 @@
 
     <body background="{{ url_for('static', filename='script/plane.jpeg') }}">
         <BODY TEXT="WHITE">
+
+            <style>
+                .sc::-webkit-scrollbar {
+                  width: 5px;
+                  height: 5px;
+                }
+                .sc::-webkit-scrollbar-track {
+                  background-color: rgba(255, 255, 255, 0.1);
+                  border-radius: 10px;
+                }
+                .sc::-webkit-scrollbar-thumb {
+                  background-color: #11171a;
+                  border-radius: 10px;
+                }
+              </style>
+
         <button onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
             width="250" height="150"></button>
-            <hr size="2" width="100%" color="white">  
-        {% for item in res_ %} 
-            <h1>{{item.airport}}</h1>
-            <h1>{{item.country}}</h1>
-            <h1>Vaccination Rate: {{item.vaccinationRate}}</h1>
-            <hr size="2" width="100%" color="white">  
-        {% endfor %}
 
-        <!-- <button id="backButton">Return Home</button> -->
+        <div class='Scroll sc'style="position:relative;left:340px;bottom:5px;height:400px;width:800px;
+        overflow:auto;border:5px solid black;padding:1.2%;background-color:white;color:black;
+        scrollbar-base-color:gold;font-family:arial;padding:15px;">
+
+        {% for item in res_ %} 
+            <h2>{{item.airport}} || {{item.country}}</h2>
+            <!--<h2>{{item.country}}</h2>-->
+            <h2>Vaccination Rate: {{item.vaccinationRate}}</h2>
+            <hr size="1" width="100%" color="black">  
+        {% endfor %}
+        </div>
+
     </body>
 </html>

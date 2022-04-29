@@ -20,10 +20,28 @@
 
     <body background="{{ url_for('static', filename='script/plane.jpeg') }}">
         <BODY TEXT="WHITE"></BODY>
+        
         <button onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
             width="250" height="150"></button>
-    <div style="position:relative;left:100px;bottom:5px;height:400px;width:700px;overflow:auto;border:5px solid black;padding:1.2%;background-color:white;color:black;scrollbar-base-color:gold;font-family:arial;padding:15px;">
-        <h2>Interactive Graphs:</h2>
+        <div class='Scroll sc'style="position:relative;left:340px;bottom:5px;height:400px;width:800px;
+        overflow:auto;border:5px solid black;padding:1.2%;background-color:white;color:black;
+        scrollbar-base-color:gold;font-family:arial;padding:15px;">
+        <style>
+            .sc::-webkit-scrollbar {
+              width: 5px;
+              height: 5px;
+            }
+            .sc::-webkit-scrollbar-track {
+              background-color: rgba(255, 255, 255, 0.1);
+              border-radius: 10px;
+            }
+            .sc::-webkit-scrollbar-thumb {
+              background-color: #11171a;
+              border-radius: 10px;
+            }
+          </style>
+        
+        <h2>Interactive Graphs</h2>
         <form action="/countrymoreDetailgraphCases" method="POST">
             <button class="button" onclick="graphCases()"><u>• New covid cases per day</u></button>
         </form>
@@ -37,10 +55,11 @@
             <button class="button" onclick="graphVax()"><u>• New vaccinations per day</u></button>
         </form>
         {% for item in res_ %} 
+            <hr size="2" width="100%" color="black">  
             <h1>Country: {{item.country}}</h1>
             <h1>DeathPerCase Rate: {{item.deathcaserate}}</h1>
             <h1>Vaccination Rate: {{item.vaccrate}}</h1>
-            <hr size="2" width="100%" color="white">  
+            <hr size="2" width="100%" color="black">  
         {% endfor %}
     </div>
     </body>

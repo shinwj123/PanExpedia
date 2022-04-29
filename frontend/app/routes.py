@@ -6,6 +6,8 @@ from flask import Flask, render_template, render_template_string, request, sessi
 
 app.secret_key = 'BAD_SECRET_KEY'
 
+validCity = "True"
+
 
 @app.route("/delete/", methods=['POST'])
 def delete():
