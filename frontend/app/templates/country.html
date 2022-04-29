@@ -19,8 +19,12 @@
     </head>
 
     <body background="{{ url_for('static', filename='script/plane.jpeg') }}">
+
         <button onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
             width="250" height="150"></button>
+
+      <div style="position:relative;left:200px;bottom:5px;height:400px;width:800px;overflow:auto;border:5px solid black;padding:1.2%;background-color:white;color:black;scrollbar-base-color:gold;font-family:arial;padding:15px;">
+
             <form action="/covidRate" method="POST">
               <p><input type = "submit" value = "Let's find out covid rate~!" /></p>
             </form>
@@ -46,7 +50,10 @@
 
 
         <h1>Rate: {{rate}}</h1>
-
+      </div>
         <!-- <button id="backButton">Return Home</button> -->
     </body>
+
+
+
 </html>
