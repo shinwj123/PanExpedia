@@ -23,18 +23,32 @@ function add() {
 
 function deleteOne() {
     let email = document.getElementById("deleteEmail").value;
-    $.ajax({
-        type: 'POST',
-        url: '/delete?e='+email,
-        contentType: 'application/jason;charset=UTF-8',
-        success: function (res) {
-            console.log(res.response);
-            location.reload();
-        },
-        error: function() {
-            console.log('Error');
-        }
-    });
+    var url = window.location.href;
+    var len = url.length;
+    var list = url.split("/");
+    target = 0;
+    // for (var i = 0; i < list.length; i++){
+        // alert(list[i]);
+    // }
+    url = list[0] + "//" + list[2];
+    //url = 'My name is '.concat(name, ', and I\'m from ', country);
+
+
+    window.location = (url);
+    url =  url + '/delete?e='+email;
+    window.location = (url);
+    // $.ajax({
+    //     type: 'POST',
+    //     url: '/delete?e='+email,
+    //     contentType: 'application/jason;charset=UTF-8',
+    //     success: function (res) {
+    //         console.log(res.response);
+    //         location.reload();
+    //     },
+    //     error: function() {
+    //         console.log('Error');
+    //     }
+    // });
 };
 
 function update() {

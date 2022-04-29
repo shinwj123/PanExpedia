@@ -9,7 +9,7 @@ app.secret_key = 'BAD_SECRET_KEY'
 validCity = "True"
 
 
-@app.route("/delete/", methods=['POST'])
+@app.route("/delete/", methods=['GET','POST'])
 def delete():
     """ recieved post requests for entry delete """
     try:
@@ -17,8 +17,8 @@ def delete():
         result = {'success': True, 'response': 'Removed task'}
     except:
         result = {'success': False, 'response': 'Something went wrong'}
-
-    return jsonify(result)
+    session['email'] = ""
+    return redirect('/')
 
 
 @app.route("/edit/<int:task_id>", methods=['POST'])
