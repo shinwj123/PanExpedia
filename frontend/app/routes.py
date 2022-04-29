@@ -6,8 +6,6 @@ from flask import Flask, render_template, render_template_string, request, sessi
 
 app.secret_key = 'BAD_SECRET_KEY'
 
-validCity = "True"
-
 
 @app.route("/delete/", methods=['POST'])
 def delete():
@@ -129,6 +127,26 @@ def userprofile():
 def moreDetails():
     res = db_helper.getmoreinfo()
     return render_template("moreDetails.html", res_ = res)
+
+@app.route("/countrymoreDetailgraphCases", methods=['GET', 'POST'])
+def graphCases():
+    db_helper.graphCases()
+    return render_template("cases.html")
+
+@app.route("/countrymoreDetailgraphTest", methods=['GET', 'POST'])
+def graphTest():
+    db_helper.graphTesting()
+    return render_template("test.html")
+
+@app.route("/countrymoreDetailgraphHosp", methods=['GET', 'POST'])
+def graphHosp():
+    db_helper.graphHosp()
+    return render_template("hosp.html")
+
+@app.route("/countrymoreDetailgraphVax", methods=['GET', 'POST'])
+def graphVax():
+    db_helper.graphVax()
+    return render_template("vax.html")
 
 @app.route("/showDestinationCity", methods=['GET','POST'])
 def showDestinationCity():
