@@ -14,7 +14,7 @@ function add() {
     let pass = document.getElementById("password").value;
     var url = window.location.href;
     var len = url.length;
-    url = url.slice(0, len-6);
+    url = url.slice(0, len-6);    
     window.location = (url);
     url =  url + 'create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass;
     window.location = (url);
@@ -45,9 +45,17 @@ function update() {
     let pass = document.getElementById("passwordUpdate").value;
     var url = window.location.href;
     var len = url.length;
-    url = url.slice(0, len-11);
+    var list = url.split("/");
+    target = 0;
+    // for (var i = 0; i < list.length; i++){
+        // alert(list[i]);
+    // }
+    url = list[0] + "//" + list[2];
+    //url = 'My name is '.concat(name, ', and I\'m from ', country);
+
+
     window.location = (url);
-    url =  url + 'update?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass;
+    url =  url + '/update?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass;
     window.location = (url);
 };
 
@@ -68,17 +76,6 @@ function search() {
 function loginRedirect() {
     url = (window.location.href + 'login'); 
     window.location = url;
-    // $.ajax({
-    //     type: 'POST',
-    //     url: '/login',
-    //     success: function (res) {
-    //         console.log(res.response);
-    //         location.reload();
-    //     },
-    //     error: function() {
-    //         console.log('Error');
-    //     }
-    // });
 };
 
 function signUpRedirect() {
