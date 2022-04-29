@@ -3,14 +3,39 @@
 <html>
     <head>
         <title>Country Info</title>
-
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+          body {
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+          button {
+            background: transparent;
+            border: 0 none;
+          }
+        </style>
+        <script src="{{ url_for('static', filename='script/modal.js') }}"></script>
     </head>
 
-    <body>
-        {% for item in res %} 
+    <body background="{{ url_for('static', filename='script/plane.jpeg') }}">
+        <button onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
+            width="250" height="150"></button>
+            <hr size="2" width="100%" color="white">  
+            {% for item in country_res %} 
             <h1>{{item.country}}</h1>
             <h1>Population: {{item.population}}</h1>
+            <hr size="2" width="100%" color="white">  
         {% endfor %}
+        <h1>Airports</h1>
+        {% for item in airport_res %}
+            <h3>{{item.airport_name}}</h3>
+            <h3>{{item.airport_code}}</h3>
+        {% endfor %}
+
+
+
+        <h1>Rate: {{rate}}</h1>
 
         <!-- <button id="backButton">Return Home</button> -->
     </body>

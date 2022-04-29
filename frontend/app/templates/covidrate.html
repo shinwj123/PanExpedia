@@ -3,15 +3,28 @@
 <html>
     <head>
         <title>Covid Rate In Each Country</title>
-
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+          button {
+            background: transparent;
+            border: 0 none;
+          }
+        </style>
     </head>
 
-    <body>
+    
+
+    <body background="{{ url_for('static', filename='script/plane.jpeg') }}">
+        <BODY TEXT="WHITE">
+        <button onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
+            width="250" height="150"></button>
+            <hr size="2" width="100%" color="white">  
         {% for item in res_ %} 
             <h2>{{item.country}}</h2>
             <h2>Covid Rate: {{item.rate}}</h2>
+            <hr size="2" width="100%" color="white">  
         {% endfor %}
-
         <!-- <button id="backButton">Return Home</button> -->
     </body>
 </html>
