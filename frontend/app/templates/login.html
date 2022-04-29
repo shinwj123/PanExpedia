@@ -1,36 +1,194 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
 
-    </head>
+<head>
+  <title>Login</title>
 
-    <body onload="incorrectLogin()">
-      <script>
-        function incorrectLogin() {
-          if ("{{ message }}" == "True") {
-            alert("Incorrect username or password");
-          }
-        }
-      </script>
-      <h1>HELLO</h1>
-        <div class="loginPopup">
-            <div class="formPopup" id="popupForm">
-              <form class="formContainer" method="post">
-                <h2>LogIn</h2>
-                <label for="email">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+
+    button {
+      background: transparent;
+      border: 0 none;
+    }
+  </style>
+</head>
+
+<body background="{{ url_for('static', filename='script/plane.jpeg') }}" onload="incorrectLogin()">
+  <button onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
+      width="250" height="150"></button>
+  <h1 style="position:relative;left:700px;bottom:10px;">LOGIN</h1>
+  <script>
+    function incorrectLogin() {
+      if ("{{ message }}" == "True") {
+        alert("Incorrect username or password");
+      }
+    }
+  </script>
+  <div class="loginPopup">
+    <div class="formPopup" id="popupForm">
+      <form class="formContainer" method="post">
+        <!--<label for="email">
                     <strong>Email</strong>
-                </label>
-                <input type="email" id="email" name="email_address" required />
-    
-                <label for="password">
+                </label>-->
+        <input type="email" id="email" placeholder="Email" name="email_address" color="white" required />
+
+        <!--<label for="password">
                     <strong>Password</strong>
-                </label>
-                <input type="password" id="password" placeholder="Password" name="password" required>
-                
-                <button type="submit" class="btn">Log in</button>
-              </form>
-            </div>
-          </div>
-    </body>
+                </label>-->
+        <input type="password" id="password" placeholder="Password" name="password" color="white" required>
+
+        <button class="button-1" role="button" type="submit" class="btn"><u>Login</u></button>
+
+        <style>
+          html {
+            height: 100%;
+          }
+
+          .loginPopup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            padding: 40px;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, .5);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+            border-radius: 10px;
+          }
+
+          .loginPopup h2 {
+            margin: 0 0 30px;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+          }
+
+          .loginPopup .user-box {
+            position: relative;
+          }
+
+          .loginPopup .formPopup input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+          }
+
+          .loginPopup form a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            color: #03e9f4;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 40px;
+            letter-spacing: 4px
+          }
+
+          .login-box a:hover {
+            background: #03e9f4;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
+          }
+
+          .login-box a span {
+            position: absolute;
+            display: block;
+          }
+
+          .button-1 {
+            align-items: center;
+            appearance: none;
+            background-color: #fff;
+            border-radius: 24px;
+            border-style: none;
+            box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+            box-sizing: border-box;
+            color: #3c4043;
+            cursor: pointer;
+            display: inline-flex;
+            fill: currentcolor;
+            font-family: "Google Sans", Roboto, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            height: 48px;
+            justify-content: center;
+            letter-spacing: .25px;
+            line-height: normal;
+            max-width: 100%;
+            overflow: visible;
+            padding: 2px 24px;
+            position: relative;
+            text-align: center;
+            text-transform: none;
+            transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1), opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            width: auto;
+            will-change: transform, opacity;
+            z-index: 0;
+          }
+
+          .button-1:hover {
+            background: #F6F9FE;
+            color: #174ea6;
+          }
+
+          .button-1:active {
+            box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+            outline: none;
+          }
+
+          .button-1:focus {
+            outline: none;
+            border: 2px solid #4285f4;
+          }
+
+          .button-1:not(:disabled) {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+          }
+
+          .button-1:not(:disabled):hover {
+            box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
+          }
+
+          .button-1:not(:disabled):focus {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+          }
+
+          .button-1:not(:disabled):active {
+            box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+          }
+
+          .button-1:disabled {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+          }
+        </style>
+      </form>
+    </div>
+  </div>
+</body>
+
 </html>

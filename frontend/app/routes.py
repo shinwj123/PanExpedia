@@ -6,17 +6,20 @@ from flask import Flask, render_template, render_template_string, request, sessi
 
 app.secret_key = 'BAD_SECRET_KEY'
 
+validCity = "True"
 
-@app.route("/delete/", methods=['POST'])
+
+@app.route("/delete/", methods=['GET','POST'])
 def delete():
     """ recieved post requests for entry delete """
+    print('HERERERER')
     try:
         db_helper.remove_user_by_email(request.args.get('e'))
         result = {'success': True, 'response': 'Removed task'}
     except:
         result = {'success': False, 'response': 'Something went wrong'}
-
-    return jsonify(result)
+    session['email'] = ""
+    return redirect('/')
 
 
 @app.route("/edit/<int:task_id>", methods=['POST'])
@@ -39,23 +42,23 @@ def bad(task_id):
 
     return jsonify(result)
 
-@app.route("/update", methods=['POST'])
+@app.route("/update", methods=['GET', 'POST'])
 def update():
-    """ recieves post requests to add new task """
-    
-    db_helper.update(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), session["email"], request.args.get('pass'))
-    result = {'success': True, 'response': 'Done'}
-    return redirect('/')
+    original_city, new_city = db_helper.update(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), session["email"], request.args.get('pass'))
+    validCity = "True"
+    if (original_city == new_city):
+        validCity = "False"
+        return render_template("userprofile.html", valid="False", city=request.args.get('destCity'))
+    else:
+        session['destCity'] = request.args.get('destCity')
+        return redirect('/')
     
 
 @app.route("/create", methods=['GET', 'POST'])
 def create():
-    print("hereerereEREWR")
-    """ recieves post requests to add new task """
     session['email'] = request.args.get('email')
-    print(request.args.get('first'))
+    session['destCity'] = request.args.get('destCity')
     task = db_helper.insert_new_user(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), request.args.get('email'), request.args.get('pass'))
-    print("here 2")
     result = {'success': True, 'response': 'Done'}
     return redirect('/')
     #return jsonify(result)
@@ -69,12 +72,12 @@ def search():
 
 @app.route("/country", methods=['GET', 'POST'])
 def home():
-    print('HERE')
+    #print('HERE')print(HERE)
+
     name = request.form['name']
-    print(name)
-    res = db_helper.search_country(name)
-    print(res)
-    return render_template("country.html", res=res)
+    #print(name)
+    country_res, airport_res, rate = db_helper.search_country(name)
+    return render_template("country.html", country_res=country_res, airport_res=airport_res, rate=rate)
 
 @app.route("/", methods=['GET', 'POST'])
 def homepage():
@@ -89,7 +92,7 @@ def covidRate():
     #name = request.form['Rate in Country'] # getting info that is stored in name
     #print(name)
     res = db_helper.getCovidRate()
-    print(res)
+    #print(res)
     return render_template("covidrate.html", res_=res)
 
 @app.route("/vaxRate", methods=['GET', 'POST'])
@@ -98,7 +101,7 @@ def vaccinationRate():
     #name = request.form['Rate in Country'] # getting info that is stored in name
     #print(name)
     res = db_helper.getVaxRate()
-    print(res)
+    #print(res)
     return render_template("vaccinationrate.html", res_=res)
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -119,6 +122,54 @@ def login():
 def signup():
     return render_template("signup.html")
 
+@app.route("/userprofile", methods=['GET', 'POST'])
+def userprofile():
+    try:
+        return render_template("userprofile.html", valid = validCity, city=session["destinationCity"])
+    except KeyError:
+        return render_template("userprofile.html", valid = validCity)
+    # Do something.
 
+@app.route("/countrymoreDetail", methods=['GET', 'POST'])
+def moreDetails():
+    res = db_helper.getmoreinfo()
+    return render_template("moreDetails.html", res_ = res)
 
+@app.route("/countrymoreDetailgraphCases", methods=['GET', 'POST'])
+def graphCases():
+    db_helper.graphCases()
+    return render_template("cases.html")
+
+@app.route("/countrymoreDetailgraphTest", methods=['GET', 'POST'])
+def graphTest():
+    db_helper.graphTesting()
+    return render_template("test.html")
+
+@app.route("/countrymoreDetailgraphHosp", methods=['GET', 'POST'])
+def graphHosp():
+    db_helper.graphHosp()
+    return render_template("hosp.html")
+
+@app.route("/countrymoreDetailgraphVax", methods=['GET', 'POST'])
+def graphVax():
+    db_helper.graphVax()
+    return render_template("vax.html")
+
+@app.route("/showDestinationCity", methods=['GET','POST'])
+def showDestinationCity():
+    res = db_helper.getDestinationCity(session['email'])
+    session["destinationCity"] = res
+    return render_template("userprofile.html", valid = "True", city = res)
+
+@app.route("/createReview", methods=['GET', 'POST'])
+def createReview():
+    print("here")
+    db_helper.createReview(session['destCity'], session['email'], request.args.get('numRating'), request.args.get('review'))
+    return redirect('/userprofile')
+
+@app.route("/countryairportratings/<airport>", methods=['GET', 'POST'])
+def getRatings(airport):
+    res = db_helper.getairportratings(airport)
+    print(res)
+    return render_template("ratings.html", res_=res)
         

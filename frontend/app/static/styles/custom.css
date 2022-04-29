@@ -8,8 +8,10 @@ html {
 }
 
 body {
-    /* Margin bottom by footer height */
-    margin-bottom: 2em;
+    margin-top: 5em;
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-bottom: 5em;
 }
 
 .footer {
@@ -26,11 +28,6 @@ body {
 hr {
     width: 50%;
     margin: auto;
-}
-
-.table td {
-    text-align: center;
-    vertical-align: middle;
 }
 
 .table tr {

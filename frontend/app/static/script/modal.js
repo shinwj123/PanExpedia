@@ -7,7 +7,6 @@ function closeForm() {
 }
 
 function add() {
-    alert("HERE");
     let firstName = document.getElementById("userFirstName").value;
     let lastName = document.getElementById("userLastName").value;
     let destCity = document.getElementById("destinationCity").value;
@@ -15,42 +14,41 @@ function add() {
     let pass = document.getElementById("password").value;
     var url = window.location.href;
     var len = url.length;
-    url = url.slice(0, len-6)
+    url = url.slice(0, len-6);    
     window.location = (url);
     url =  url + 'create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass;
-    //url = url + 'create';
-    alert(url);
     window.location = (url);
-    
-    //window.location = (url);
-    // $.ajax({
-    //     type: 'POST',
-    //     url: '/create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,
-    //     contentType: 'application/jason;charset=UTF-8',
-    //     success: function (res) {
-    //         console.log(res.response);
-    //     },
-    //     error: function() {
-    //         console.log('Error');
-    //     }
-    // });
     console.log("Done with ajax");
 };
 
 function deleteOne() {
     let email = document.getElementById("deleteEmail").value;
-    $.ajax({
-        type: 'POST',
-        url: '/delete?e='+email,
-        contentType: 'application/jason;charset=UTF-8',
-        success: function (res) {
-            console.log(res.response);
-            location.reload();
-        },
-        error: function() {
-            console.log('Error');
-        }
-    });
+    var url = window.location.href;
+    var len = url.length;
+    var list = url.split("/");
+    target = 0;
+    // for (var i = 0; i < list.length; i++){
+        // alert(list[i]);
+    // }
+    url = list[0] + "//" + list[2];
+    //url = 'My name is '.concat(name, ', and I\'m from ', country);
+
+    //window.location(url + '/userprofile');
+    window.location = (url);
+    url =  url + '/delete?e='+email;
+    window.location = (url);
+    // $.ajax({
+    //     type: 'POST',
+    //     url: '/delete?e='+email,
+    //     contentType: 'application/jason;charset=UTF-8',
+    //     success: function (res) {
+    //         console.log(res.response);
+    //         location.reload();
+    //     },
+    //     error: function() {
+    //         console.log('Error');
+    //     }
+    // });
 };
 
 function update() {
@@ -59,18 +57,20 @@ function update() {
     let destCity = document.getElementById("destinationCityUpdate").value;
     let email = document.getElementById("emailUpdate").value;
     let pass = document.getElementById("passwordUpdate").value;
-    $.ajax({
-        type: 'POST',
-        url: '/update?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,
-        contentType: 'application/jason;charset=UTF-8',
-        success: function (res) {
-            console.log(res.response);
-            location.reload();
-        },
-        error: function() {
-            console.log('Error');
-        }
-    });
+    var url = window.location.href;
+    var len = url.length;
+    var list = url.split("/");
+    target = 0;
+    // for (var i = 0; i < list.length; i++){
+        // alert(list[i]);
+    // }
+    url = list[0] + "//" + list[2];
+    //url = 'My name is '.concat(name, ', and I\'m from ', country);
+
+
+    window.location = (url);
+    url =  url + '/update?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass;
+    window.location = (url);
 };
 
 function search() {
@@ -89,32 +89,61 @@ function search() {
 
 function loginRedirect() {
     url = (window.location.href + 'login'); 
-    alert(window.location.href);
-    alert(url);
     window.location = url;
-    // $.ajax({
-    //     type: 'POST',
-    //     url: '/login',
-    //     success: function (res) {
-    //         console.log(res.response);
-    //         location.reload();
-    //     },
-    //     error: function() {
-    //         console.log('Error');
-    //     }
-    // });
 };
 
 function signUpRedirect() {
     url = (window.location.href + 'signup');
-    alert(url);
     window.location = url; 
+};
+
+function userProfileRedirect() {
+    url = (window.location.href + 'userprofile');
+    window.location = url; 
+};
+
+function moreDetails() {
+    url = (window.location.href + 'moreDetail'); 
+    window.location = url;
+};
+
+function about() {
+    window.location = 'https://github-dev.cs.illinois.edu/sp22-cs411/sp22-cs411-team101-abduFormedTeam';
+};
+
+function abdu() {
+    window.location = 'https://cs.illinois.edu/about/people/faculty/alawini';
+};
+
+function showDestinationCity() {
+    var url = window.location.href;
+    var list = url.split("/");
+    
+    url = list[0] + "//" + list[2];
+    window.location = (url);
+
+    url =  url + '/showDestinationCity';
+    window.location = (url);
+};
+
+function createRating() {
+    numRating = document.getElementById("numberRating").value;
+    review = document.getElementById("review").value;
+
+    var url = window.location.href;
+    var list = url.split("/");
+    
+    url = list[0] + "//" + list[2];
+    window.location = (url);
+    alert(url);
+    url =  url + '/createReview?numRating='+numRating+'&review='+review;
+    alert(url);
+    window.location = (url);
 }
 
 // $(document).ready(function () {
 //     // example: https://getbootstrap.com/docs/4.2/components/modal/
 //     // show modal
-//     alert("HELLO");
 
     
 
