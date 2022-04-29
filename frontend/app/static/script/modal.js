@@ -14,24 +14,10 @@ function add() {
     let pass = document.getElementById("password").value;
     var url = window.location.href;
     var len = url.length;
-    url = url.slice(0, len-6)
+    url = url.slice(0, len-6);
     window.location = (url);
     url =  url + 'create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass;
-    //url = url + 'create';
     window.location = (url);
-    
-    //window.location = (url);
-    // $.ajax({
-    //     type: 'POST',
-    //     url: '/create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,
-    //     contentType: 'application/jason;charset=UTF-8',
-    //     success: function (res) {
-    //         console.log(res.response);
-    //     },
-    //     error: function() {
-    //         console.log('Error');
-    //     }
-    // });
     console.log("Done with ajax");
 };
 
@@ -57,18 +43,12 @@ function update() {
     let destCity = document.getElementById("destinationCityUpdate").value;
     let email = document.getElementById("emailUpdate").value;
     let pass = document.getElementById("passwordUpdate").value;
-    $.ajax({
-        type: 'POST',
-        url: '/update?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass,
-        contentType: 'application/jason;charset=UTF-8',
-        success: function (res) {
-            console.log(res.response);
-            location.reload();
-        },
-        error: function() {
-            console.log('Error');
-        }
-    });
+    var url = window.location.href;
+    var len = url.length;
+    url = url.slice(0, len-11);
+    window.location = (url);
+    url =  url + 'update?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass;
+    window.location = (url);
 };
 
 function search() {

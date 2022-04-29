@@ -39,7 +39,7 @@ def bad(task_id):
 
     return jsonify(result)
 
-@app.route("/update", methods=['POST'])
+@app.route("/update", methods=['GET', 'POST'])
 def update():
     """ recieves post requests to add new task """
     print("HERE")
