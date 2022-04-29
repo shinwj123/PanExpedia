@@ -24,7 +24,16 @@
 <body background="{{ url_for('static', filename='script/plane.jpeg') }}">
   <button onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
       width="250" height="150"></button>
+
+
+  
+
   <h1>UPDATE</h1>
+
+
+  {% if valid == "False" %}
+  <script>alert("Invalid Destination City");</script>
+  {% endif %}
   <form class="formContainer"></form>
     <h2>Update User</h2>
     <label for="userFirstName">

@@ -28,32 +28,44 @@ def fetch_todo() -> dict:
 
 def update(fn: str, ln: str, dc: str, email: str, p: str) -> None:
     conn = db.connect()
-    print("hereeee")
-    print(fn)
-    print(email)
-    query = '''CREATE TRIGGER UpdateTrig
-                 BEFORE UPDATE ON UserProfile
-                 FOR EACH ROW
-                 BEGIN
-                   SET @city = (SELECT airportCity FROM AirportData WHERE airportCity = new.destinationCity );
-                 IF @city IS NULL THEN
-                   SET new.destinationCity = "INVALID";
-                 END IF;
-                 END; 
-                 '''
-    #results = conn.execute(query)
-    query = 'UPDATE UserProfile SET userFirstName="{}", userLastName="{}", destinationCity="{}", password="{}" WHERE email="{}";'.format(fn, ln, dc, p, email)
-    print(query)
+    # Get original city for validation purposes
+    query = 'SELECT destinationCity FROM UserProfile WHERE email="{}"'.format(email)
     results = conn.execute(query)
+    cities = []
+    for r in results:
+       item = {
+           "city": r[0]
+       }
+       cities.append(item)
+    original_city = cities[0]["city"]
+    # query = '''CREATE TRIGGER UpdateCityTrigger
+    #              BEFORE UPDATE ON UserProfile
+    #              FOR EACH ROW
+    #              BEGIN
+    #                SET @city = (SELECT airportCity FROM AirportData WHERE airportCity = new.destinationCity );
+    #              IF @city IS NOT NULL THEN
+    #                SET new.destinationCity = new.destinationCity;
+    #              ELSE
+    #                SET new.destinationCity = old.destinationCity;
+    #              END IF;
+    #              END; 
+    #              '''
+    query2 = 'UPDATE UserProfile SET userFirstName="{}", userLastName="{}", destinationCity="{}", password="{}" WHERE email="{}";'.format(fn, ln, dc, p, email)
+    conn.execute(query2)
+    results = conn.execute(query)
+    cities = []
+    for r in results:
+        item = {
+            "city": r[0]
+        }
+        cities.append(item)
+    new_city = cities[0]["city"]
     conn.close()
-    print(results)
-    return results
+    return original_city, new_city
 
 
 def insert_new_user(fn: str, ln: str, dc: str, email: str, p: str) ->  int:
-    print("HEHEHEHE")
     conn = db.connect()
-    print("Within db")
     query = 'INSERT INTO UserProfile (userFirstName, userLastName, destinationCity, email, password) VALUES ("{}", "{}", "{}", "{}", "{}");'.format(fn, ln, dc, email, p)
     conn.execute(query)
     task_id = 2

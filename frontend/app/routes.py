@@ -6,6 +6,8 @@ from flask import Flask, render_template, render_template_string, request, sessi
 
 app.secret_key = 'BAD_SECRET_KEY'
 
+validCity = "True"
+
 
 @app.route("/delete/", methods=['POST'])
 def delete():
@@ -41,21 +43,21 @@ def bad(task_id):
 
 @app.route("/update", methods=['GET', 'POST'])
 def update():
-    """ recieves post requests to add new task """
-    print("HERE")
-    db_helper.update(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), session["email"], request.args.get('pass'))
-    result = {'success': True, 'response': 'Done'}
-    return redirect('/')
+    original_city, new_city = db_helper.update(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), session["email"], request.args.get('pass'))
+    validCity = "True"
+    print(original_city)
+    print(new_city)
+    if (original_city == new_city):
+        validCity = "False"
+        return render_template("userprofile.html", valid="False")
+    else:
+        return redirect('/')
     
 
 @app.route("/create", methods=['GET', 'POST'])
 def create():
-    print("hereerereEREWR")
-    """ recieves post requests to add new task """
     session['email'] = request.args.get('email')
-    print(request.args.get('first'))
     task = db_helper.insert_new_user(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), request.args.get('email'), request.args.get('pass'))
-    print("here 2")
     result = {'success': True, 'response': 'Done'}
     return redirect('/')
     #return jsonify(result)
@@ -120,7 +122,7 @@ def signup():
 
 @app.route("/userprofile", methods=['GET', 'POST'])
 def userprofile():
-    return render_template("userprofile.html")
+    return render_template("userprofile.html", valid = validCity)
 
 @app.route("/countrymoreDetail", methods=['GET', 'POST'])
 def moreDetails():
