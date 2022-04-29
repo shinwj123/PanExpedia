@@ -69,11 +69,12 @@ def search():
 
 @app.route("/country", methods=['GET', 'POST'])
 def home():
-    print('HERE')
+    #print('HERE')print(HERE)
+
     name = request.form['name']
-    print(name)
-    country_res, airport_res, covid_res, rate = db_helper.search_country(name)
-    return render_template("country.html", country_res=country_res, airport_res=airport_res, covid_res=covid_res, rate=rate)
+    #print(name)
+    country_res, airport_res, rate = db_helper.search_country(name)
+    return render_template("country.html", country_res=country_res, airport_res=airport_res, rate=rate)
 
 @app.route("/", methods=['GET', 'POST'])
 def homepage():
@@ -88,7 +89,7 @@ def covidRate():
     #name = request.form['Rate in Country'] # getting info that is stored in name
     #print(name)
     res = db_helper.getCovidRate()
-    print(res)
+    #print(res)
     return render_template("covidrate.html", res_=res)
 
 @app.route("/vaxRate", methods=['GET', 'POST'])
@@ -97,7 +98,7 @@ def vaccinationRate():
     #name = request.form['Rate in Country'] # getting info that is stored in name
     #print(name)
     res = db_helper.getVaxRate()
-    print(res)
+    #print(res)
     return render_template("vaccinationrate.html", res_=res)
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -124,7 +125,8 @@ def userprofile():
 
 @app.route("/countrymoreDetail", methods=['GET', 'POST'])
 def moreDetails():
-    return render_template("moreDetails.html")
+    res = db_helper.getmoreinfo()
+    return render_template("moreDetails.html", res_ = res)
 
 
 
