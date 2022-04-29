@@ -1,4 +1,5 @@
 from app import db
+from datetime import date, timedelta
 
 def fetch_todo() -> dict:
     # """Reads all tasks listed in the todo table
@@ -83,6 +84,57 @@ def search_db(c: str) -> None:
 
     return res
 
+def search_country(c: str):
+    # Country Name and Population
+    country_res = search_db(c)
+
+    # Get airport data from Country if exists
+    conn = db.connect()
+    query = 'select CASE WHEN count(1) > 0 THEN "true" ELSE "false" END from AirportData where country = "{}"'.format(c)
+    results = conn.execute(query)
+    res = []
+    for r in results:
+        item = {
+            "airport_exists": r[0]
+        }
+        res.append(item)
+    airport_exists = res[0]["airport_exists"]
+    if (airport_exists):
+        query = 'SELECT airportName, airportCode FROM AirportData WHERE country = "{}"'.format(c)
+        results = conn.execute(query)
+        airport_res = []
+        for r in results:
+            item = {
+                "airport_name": r[0],
+                "airport_code": r[1]
+            }
+            airport_res.append(item)
+        
+    # Get Covid Data
+    d = date.today() - timedelta(days=2)
+    d = '2022-03-15'
+    query = 'SELECT newCaseNumber FROM CovidCases WHERE country = "{}" AND date="{}";'.format(c, d)
+    results = conn.execute(query)
+    covid_res = []
+    for r in results:
+        item = {
+            "covid_cases": r[0]
+        }
+        covid_res.append(item)
+
+    # Get Vaccination Rate
+    query = 'SELECT SUM(newCaseNumber)/population as rate FROM CountryData NATURAL JOIN CovidCases WHERE country="{}"'.format(c)
+    results = conn.execute(query)
+    rates = []
+    for r in results:
+        item = {
+            "rate": r[0]
+        } 
+        rates.append(item)
+    rate = rates[0]["rate"]
+
+    return country_res, airport_res, covid_res, rate
+
 def getCovidRate():
     conn = db.connect()
     query = 'SELECT country, SUM(newCaseNumber)/population as rate FROM CountryData NATURAL JOIN CovidCases GROUP BY country ORDER BY rate DESC;'
@@ -149,6 +201,3 @@ def login(email: str, p: str):
     print("VALID: " + str(valid))
     return valid
     
-def search_country(c: str):
-    res = search_db(c)
-    return res

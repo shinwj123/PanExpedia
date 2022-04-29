@@ -42,7 +42,7 @@ def bad(task_id):
 @app.route("/update", methods=['POST'])
 def update():
     """ recieves post requests to add new task """
-    
+    print("HERE")
     db_helper.update(request.args.get('first'), request.args.get('last'), request.args.get('destCity'), session["email"], request.args.get('pass'))
     result = {'success': True, 'response': 'Done'}
     return redirect('/')
@@ -72,9 +72,8 @@ def home():
     print('HERE')
     name = request.form['name']
     print(name)
-    res = db_helper.search_country(name)
-    print(res)
-    return render_template("country.html", res=res)
+    country_res, airport_res, covid_res, rate = db_helper.search_country(name)
+    return render_template("country.html", country_res=country_res, airport_res=airport_res, covid_res=covid_res, rate=rate)
 
 @app.route("/", methods=['GET', 'POST'])
 def homepage():

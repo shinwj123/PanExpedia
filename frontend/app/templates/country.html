@@ -18,11 +18,16 @@
         <script src="{{ url_for('static', filename='script/modal.js') }}"></script>
     </head>
 
+<<<<<<< HEAD
     <body background="{{ url_for('static', filename='script/plane.jpeg') }}">
         <button onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
             width="250" height="150"></button>
             <hr size="2" width="100%" color="white">  
             {% for item in country_res %} 
+=======
+    <body>
+        {% for item in country_res %} 
+>>>>>>> 9f593d962f16a4c7dbc3f3042656b410dce1d70e
             <h1>{{item.country}}</h1>
             <h1>Population: {{item.population}}</h1>
             <hr size="2" width="100%" color="white">  
@@ -32,6 +37,15 @@
             <h3>{{item.airport_name}}</h3>
             <h3>{{item.airport_code}}</h3>
         {% endfor %}
+        <h1>Airports</h1>
+        {% for item in airport_res %}
+            <h3>{{item.airport_name}}</h3>
+            <h3>{{item.airport_code}}</h3>
+        {% endfor %}
+
+
+
+        <h1>Rate: {{rate}}</h1>
 
 
 

@@ -7,7 +7,6 @@ function closeForm() {
 }
 
 function add() {
-    alert("HERE");
     let firstName = document.getElementById("userFirstName").value;
     let lastName = document.getElementById("userLastName").value;
     let destCity = document.getElementById("destinationCity").value;
@@ -19,7 +18,6 @@ function add() {
     window.location = (url);
     url =  url + 'create?first='+firstName+'&last='+lastName+'&destCity='+destCity+'&email='+email+'&pass='+pass;
     //url = url + 'create';
-    alert(url);
     window.location = (url);
     
     //window.location = (url);
@@ -89,8 +87,6 @@ function search() {
 
 function loginRedirect() {
     url = (window.location.href + 'login'); 
-    alert(window.location.href);
-    alert(url);
     window.location = url;
     // $.ajax({
     //     type: 'POST',
@@ -107,20 +103,17 @@ function loginRedirect() {
 
 function signUpRedirect() {
     url = (window.location.href + 'signup');
-    alert(url);
     window.location = url; 
 };
 
 function userProfileRedirect() {
     url = (window.location.href + 'userprofile');
-    alert(url);
     window.location = url; 
 };
 
 // $(document).ready(function () {
 //     // example: https://getbootstrap.com/docs/4.2/components/modal/
 //     // show modal
-//     alert("HELLO");
 
     
 
