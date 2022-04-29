@@ -128,6 +128,10 @@ def moreDetails():
     res = db_helper.getmoreinfo()
     return render_template("moreDetails.html", res_ = res)
 
+@app.route("/showDestinationCity", methods=['GET','POST'])
+def showDestinationCity():
+    res = db_helper.getDestinationCity(session['email'])
+    return render_template("userprofile.html", valid = "True", city = res)
 
 
         

@@ -238,3 +238,22 @@ def getmoreinfo():
             res.append(item)
 
     return res
+
+def getDestinationCity(email):
+    
+    conn = db.connect()
+    query = 'SELECT destinationCity FROM UserProfile WHERE email="{}"'.format(email)
+    results = conn.execute(query)
+    conn.close()
+    res = []
+    
+    for r in results:
+        item = {
+            "destinationcity": r[0]
+        }
+        
+        res.append(item)
+    
+    city = res[0]["destinationcity"]
+
+    return city

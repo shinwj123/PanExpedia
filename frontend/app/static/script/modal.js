@@ -91,15 +91,27 @@ function userProfileRedirect() {
 function moreDetails() {
     url = (window.location.href + 'moreDetail'); 
     window.location = url;
-}
+};
 
 function about() {
     window.location = 'https://github-dev.cs.illinois.edu/sp22-cs411/sp22-cs411-team101-abduFormedTeam';
-}
+};
 
 function abdu() {
     window.location = 'https://cs.illinois.edu/about/people/faculty/alawini';
-}
+};
+
+function showDestinationCity() {
+    var list = url.split("/");
+    
+    url = list[0] + "//" + list[2];
+
+    window.location = (url);
+
+    url =  url + '/showDestinationCity';
+    alert(url)
+    window.location = (url);
+};
 
 // $(document).ready(function () {
 //     // example: https://getbootstrap.com/docs/4.2/components/modal/
