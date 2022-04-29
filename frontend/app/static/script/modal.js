@@ -102,14 +102,13 @@ function abdu() {
 };
 
 function showDestinationCity() {
+    var url = window.location.href;
     var list = url.split("/");
-    
-    url = list[0] + "//" + list[2];
 
+    url = list[0] + "//" + list[2];
     window.location = (url);
 
     url =  url + '/showDestinationCity';
-    alert(url)
     window.location = (url);
 };
 

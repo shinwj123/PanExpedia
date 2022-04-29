@@ -25,10 +25,16 @@
   <button onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
       width="250" height="150"></button>
 
-      <script type="text/javascript">
-        showDestinationCity();
-      </script>
-  
+
+
+    {% if city is defined %}
+
+    {% else %}
+    <script type="text/javascript">
+      showDestinationCity();
+    </script>
+    {% endif %}
+
 
   <h1>UPDATE</h1>
 
@@ -36,9 +42,7 @@
   {% if valid == "False" %}
   <script>alert("Invalid Destination City");</script>
   {% endif %}
-
-  
-  <form class="formContainer"></form>
+<form class="formContainer"></form>
     <h2>Update User</h2>
     <label for="userFirstName">
       <strong>First Name</strong>
@@ -69,8 +73,6 @@
   </form>
 
   <br>
-
-  <button type="button" onclick="showDestinationCity()"><u>Submit Review</u></button>n></button?
 
   <strong> Destination City : {{city}} </strong>
 
