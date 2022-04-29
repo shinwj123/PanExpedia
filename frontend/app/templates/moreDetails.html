@@ -6,10 +6,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
-          body {
+        body {
             background-repeat: no-repeat;
             background-size: cover;
-          }
+            }
           button {
             background: transparent;
             border: 0 none;
@@ -19,7 +19,17 @@
     </head>
 
     <body background="{{ url_for('static', filename='script/plane.jpeg') }}">
+        <BODY TEXT="WHITE"></BODY>
         <button onclick="window.location.href='/'"><img src="{{ url_for('static', filename='script/logo.png') }}" alt="logo"
             width="250" height="150"></button>
+    <div style="position:relative;left:100px;bottom:5px;height:400px;width:700px;overflow:auto;border:5px solid black;padding:1.2%;background-color:white;color:black;scrollbar-base-color:gold;font-family:arial;padding:15px;">
+        {% for item in res_ %} 
+            <h1>Country: {{item.country}}</h1>
+            <h1>DeathPerCase Rate: {{item.deathcaserate}}</h1>
+            <h1>Vaccination Rate: {{item.vaccrate}}</h1>
+            <hr size="2" width="100%" color="white">  
+        {% endfor %}
+
+    </div>
     </body>
 </html>

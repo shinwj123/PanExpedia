@@ -1,6 +1,8 @@
 from app import db
 from datetime import date, timedelta
 
+curr_search = []
+
 def fetch_todo() -> dict:
     # """Reads all tasks listed in the todo table
 
@@ -63,7 +65,6 @@ def update(fn: str, ln: str, dc: str, email: str, p: str) -> None:
     conn.close()
     return original_city, new_city
 
-
 def insert_new_user(fn: str, ln: str, dc: str, email: str, p: str) ->  int:
     conn = db.connect()
     query = 'INSERT INTO UserProfile (userFirstName, userLastName, destinationCity, email, password) VALUES ("{}", "{}", "{}", "{}", "{}");'.format(fn, ln, dc, email, p)
@@ -93,16 +94,17 @@ def search_db(c: str) -> None:
             "population": r[2]
         }
         res.append(item)
+        curr_search.append(r[0])
 
     return res
 
 def search_country(c: str):
+    curr_search.clear()
     # Country Name and Population
     country_res = search_db(c)
-
     # Get airport data from Country if exists
     conn = db.connect()
-    query = 'select CASE WHEN count(1) > 0 THEN "true" ELSE "false" END from AirportData where country = "{}"'.format(c)
+    query = 'select CASE WHEN count(1) > 0 THEN "true" ELSE "false" END from AirportData where country LIKE "%%{}%%"'.format(c)
     results = conn.execute(query)
     res = []
     for r in results:
@@ -112,7 +114,7 @@ def search_country(c: str):
         res.append(item)
     airport_exists = res[0]["airport_exists"]
     if (airport_exists):
-        query = 'SELECT airportName, airportCode FROM AirportData WHERE country = "{}"'.format(c)
+        query = 'SELECT airportName, airportCode FROM AirportData WHERE country LIKE "%%{}%%"'.format(c)
         results = conn.execute(query)
         airport_res = []
         for r in results:
@@ -122,30 +124,34 @@ def search_country(c: str):
             }
             airport_res.append(item)
         
-    # Get Covid Data
-    d = date.today() - timedelta(days=2)
-    d = '2022-03-15'
-    query = 'SELECT newCaseNumber FROM CovidCases WHERE country = "{}" AND date="{}";'.format(c, d)
-    results = conn.execute(query)
-    covid_res = []
-    for r in results:
-        item = {
-            "covid_cases": r[0]
-        }
-        covid_res.append(item)
+    # # Get Covid Data
+    # d = date.today() - timedelta(days=2)
+    # d = '2022-03-15'
+    # query = 'SELECT newCaseNumber FROM CovidCases WHERE country = "{}" AND date="{}";'.format(c, d)
+    # results = conn.execute(query)
+    # covid_res = []
+    # for r in results:
+    #     item = {
+    #         "covid_cases": r[0]
+    #     }
+    #     covid_res.append(item)
 
     # Get Vaccination Rate
-    query = 'SELECT SUM(newCaseNumber)/population as rate FROM CountryData NATURAL JOIN CovidCases WHERE country="{}"'.format(c)
+    query = 'SELECT SUM(population) FROM CountryData WHERE country LIKE "%%{}%%" '.format(c)    
     results = conn.execute(query)
+    query1 = 'SELECT SUM(newCaseNumber) FROM CovidCases WHERE country LIKE "%%{}%%" '.format(c)
+    results1 = conn.execute(query1)
     rates = []
+    rates1 = []
     for r in results:
-        item = {
-            "rate": r[0]
-        } 
-        rates.append(item)
-    rate = rates[0]["rate"]
+        rates.append(r[0])
 
-    return country_res, airport_res, covid_res, rate
+    for r in results1:
+        rates1.append(r[0])
+    
+    rate = round(float(rates1[0]/rates[0]), 5)
+    conn.close()
+    return country_res, airport_res, rate
 
 def getCovidRate():
     conn = db.connect()
@@ -154,11 +160,12 @@ def getCovidRate():
     conn.close()
     res = []
     for r in results:
-        item = {
-            "country": r[0],
-            "rate": r[1]
-        }
-        res.append(item)
+        if(r[0] in curr_search):
+            item = {
+                "country": r[0],
+                "rate": r[1]
+            }
+            res.append(item)
 
     return res
 
@@ -206,10 +213,28 @@ def login(email: str, p: str):
         if (res[0]["pass"] == p):
             valid = True
         else:
-            print("HERE")
+            #print("HERE")
             valid = False
     else:
         return valid
-    print("VALID: " + str(valid))
+    #print("VALID: " + str(valid))
     return valid
+
+def getmoreinfo():
     
+    conn = db.connect()
+    query = 'call CountrySummary();'
+    results = conn.execute(query)
+    conn.close()
+    res = []
+    for r in results:
+        if(r[0] in curr_search):
+
+            item = {
+                "country": r[0],
+                "vaccrate": r[1],
+                "deathcaserate": r[2]
+            }
+            res.append(item)
+
+    return res
