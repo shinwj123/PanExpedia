@@ -33,7 +33,7 @@ function deleteOne() {
     url = list[0] + "//" + list[2];
     //url = 'My name is '.concat(name, ', and I\'m from ', country);
 
-
+    //window.location(url + '/userprofile');
     window.location = (url);
     url =  url + '/delete?e='+email;
     window.location = (url);

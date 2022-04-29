@@ -419,7 +419,7 @@ def createReview(destinationCity, email, numRating, review):
     name = res[0]['name'] # Airport name
     print("name")
 
-    query = 'INSERT INTO Ratings (email, airportName, review, rating) VALUES ("{}", "{}", "{}", "{}", "{}");'.format(email, name, review, numRating)
+    query = 'INSERT INTO Ratings (email, airportName, review, rating) VALUES ("{}", "{}", "{}", "{}");'.format(email, name, review, numRating)
     conn.execute(query)
     conn.close()
 

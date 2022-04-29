@@ -12,6 +12,7 @@ validCity = "True"
 @app.route("/delete/", methods=['GET','POST'])
 def delete():
     """ recieved post requests for entry delete """
+    print('HERERERER')
     try:
         db_helper.remove_user_by_email(request.args.get('e'))
         result = {'success': True, 'response': 'Removed task'}
@@ -47,7 +48,7 @@ def update():
     validCity = "True"
     if (original_city == new_city):
         validCity = "False"
-        return render_template("userprofile.html", valid="False")
+        return render_template("userprofile.html", valid="False", city=request.args.get('destCity'))
     else:
         session['destCity'] = request.args.get('destCity')
         return redirect('/')
@@ -123,7 +124,11 @@ def signup():
 
 @app.route("/userprofile", methods=['GET', 'POST'])
 def userprofile():
-    return render_template("userprofile.html", valid = validCity)
+    try:
+        return render_template("userprofile.html", valid = validCity, city=session["destinationCity"])
+    except KeyError:
+        return render_template("userprofile.html", valid = validCity)
+    # Do something.
 
 @app.route("/countrymoreDetail", methods=['GET', 'POST'])
 def moreDetails():
@@ -153,6 +158,7 @@ def graphVax():
 @app.route("/showDestinationCity", methods=['GET','POST'])
 def showDestinationCity():
     res = db_helper.getDestinationCity(session['email'])
+    session["destinationCity"] = res
     return render_template("userprofile.html", valid = "True", city = res)
 
 @app.route("/createReview", methods=['GET', 'POST'])
