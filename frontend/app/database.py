@@ -422,3 +422,18 @@ def createReview(destinationCity, email, numRating, review):
     query = 'INSERT INTO Ratings (email, airportName, review, rating) VALUES ("{}", "{}", "{}", "{}", "{}");'.format(email, name, review, numRating)
     conn.execute(query)
     conn.close()
+    
+def getairportratings(airport):
+    conn = db.connect()
+    query = 'Select rating, review from Ratings where airportName = "{}";'.format(airport)
+    results = conn.execute(query)
+    conn.close()
+    res = []
+    for r in results:
+        item = {
+            "rating": r[0],
+            "review": r[1]
+        }
+        res.append(item)
+
+    return res

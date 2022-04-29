@@ -161,4 +161,9 @@ def createReview():
     db_helper.createReview(session['destCity'], session['email'], request.args.get('numRating'), request.args.get('review'))
     return redirect('/userprofile')
 
+@app.route("/countryairportratings/<airport>", methods=['GET', 'POST'])
+def getRatings(airport):
+    res = db_helper.getairportratings(airport)
+    print(res)
+    return render_template("ratings.html", res_=res)
         
