@@ -20,7 +20,7 @@
 |   Info      |        Description     |
 | ----------- | ---------------------- |
 |  Title      | PandexPedia |
-| System URL  | http://127.0.0.1:5000/(LocalHost Link)|
+| System URL  | http://127.0.0.1:5000/ (LocalHost Link)|
 | Video Link  | https://youtu.be/sP0EiD96zE0 |
 
 ## Project Summary
