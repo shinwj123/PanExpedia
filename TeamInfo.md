@@ -19,9 +19,9 @@
 
 |   Info      |        Description     |
 | ----------- | ---------------------- |
-|  Title      |          |
-| System URL  |         |
-| Video Link  |        |
+|  Title      | PandexPedia |
+| System URL  | LocalHost Link |
+| Video Link  | https://youtu.be/sP0EiD96zE0 |
 
 ## Project Summary
 Ever since the pandemic started, people have been apprehensive about traveling, holding back their urge to explore due to a fear of catching COVID. Despite different countries having certain ideas for whether or not it is safe to travel, many people will have their own personal opinions on the matter. By combining information about both COVID and airports, users will be able to look into the pandemic situation for potential vacation spots, giving them one less thing to worry about while planning a trip. 
