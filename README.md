@@ -1,7 +1,8 @@
 
 # sp22-cs411-team101-abduFormedTeam
 
-# PanExpedia : The Ultimate Travel Web Application during COVID-19 Pandemic
+# PanExpedia 
+## The Ultimate Travel Web Application during COVID-19 Pandemic
 `We are the best, don't listen to anyone else`
 
 ## Project Description 
